@@ -8,6 +8,7 @@ class UserType(DjangoObjectType):
         model = get_user_model()
         # only_fields = ('id', 'email', 'password', 'username')   This would make it so the default fields such as SuperUser are not included
 
+
 class Query(graphene.ObjectType):
     user = graphene.Field(UserType, id=graphene.Int(required=True))
     me = graphene.Field(UserType)
