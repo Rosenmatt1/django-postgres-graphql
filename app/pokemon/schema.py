@@ -24,7 +24,12 @@ class CreatePokemon(graphene.Mutation):
         power_level = graphene.Int()
 
     def mutate(self, info, name, abilities, power_level):
-        pokemon = Pokemon(name=name, abilities=abilities, power_level=power_level)
+        user = info.context.user
+
+        if user.is_anonymous:
+            raise Exception('Log in to add Pokemon')
+
+        pokemon = Pokemon(name=name, abilities=abilities, power_level=power_level, posted_by=user)
         pokemon.save()
         return CreatePokemon(pokemon=pokemon)
 
