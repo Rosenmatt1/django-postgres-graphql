@@ -7,8 +7,9 @@ name = "pypi"
 Django = "*"
 graphene-django = "*"
 django-cors-headers = "*"
-pyjwt = "==1.7.0"
+PyJWT = "==1.7.0"
 django-graphql-jwt = "*"
+pyjwt = "==1.7.0"
 
 [dev-packages]
 autopep8 = "*"
