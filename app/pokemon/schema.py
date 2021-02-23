@@ -34,5 +34,32 @@ class CreatePokemon(graphene.Mutation):
         return CreatePokemon(pokemon=pokemon)
 
 
+class UpdatePokemon(graphene.Mutation):
+    pokemon = graphene.Field(PokemonType)
+
+    class Arugments:
+        pokemon_id = graphene.Int(required=True)
+        name = graphene.String()
+        abilities = graphene.String()
+        power_level = graphene.Int()
+
+    def mutate(self, info, pokemon_id, name, abilities, power_level):
+        user = info.context.user
+        # print("User!!!!!!", user)
+        pokemon = Pokemon.objects.get(id=pokemon_id)
+
+        if pokemon.posted_by != user:
+            raise Exception('No permetitted to update Pokemon')
+
+        pokemon.name = name
+        pokemon.abilities = abilities
+        pokemon.power_level = power_level
+        pokemon.save()
+        return UpdatePokemon(pokemon=pokemon)
+
+
 class Mutation(graphene.ObjectType):
     create_pokemon = CreatePokemon.Field()
+    update_pokemon = UpdatePokemon.Field()
+
+    
