@@ -49,7 +49,7 @@ class UpdatePokemon(graphene.Mutation):
         pokemon = Pokemon.objects.get(id=pokemon_id)
 
         if pokemon.posted_by != user:
-            raise Exception('No permetitted to update Pokemon')
+            raise Exception('Not permitted to update Pokemon')
 
         pokemon.name = name
         pokemon.abilities = abilities
@@ -58,8 +58,26 @@ class UpdatePokemon(graphene.Mutation):
         return UpdatePokemon(pokemon=pokemon)
 
 
+class DeletePokemon(graphene.Mutation):
+    pokemon_id = graphene.Int()
+
+    class Arguments:
+        pokemon_id = graphene.Int(required=True)
+
+    def mutate(self, info, track_id):
+        user = info.context.user
+        pokemon= Pokemon.objects.get(id=track_id)
+
+        if pokemon.posted_by != user:
+            raise Exception('Not permitted to delete this track')
+
+        pokemon.delete()
+        return DeletePokemon(pokemon_id=track_id)
+
+
 class Mutation(graphene.ObjectType):
     create_pokemon = CreatePokemon.Field()
     update_pokemon = UpdatePokemon.Field()
+    delete_pokemon = DeletePokemon.Field()
 
     
