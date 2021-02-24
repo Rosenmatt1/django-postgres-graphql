@@ -12,6 +12,7 @@ class Query(graphene.ObjectType):
     pokemon = graphene.List(PokemonType)
 
     def resolve_pokemon(self, info):
+        
         return Pokemon.objects.all()
 
 
@@ -64,15 +65,15 @@ class DeletePokemon(graphene.Mutation):
     class Arguments:
         pokemon_id = graphene.Int(required=True)
 
-    def mutate(self, info, track_id):
+    def mutate(self, info, pokemon_id):
         user = info.context.user
-        pokemon= Pokemon.objects.get(id=track_id)
+        pokemon = Pokemon.objects.get(id=pokemon_id)
 
         if pokemon.posted_by != user:
             raise Exception('Not permitted to delete this track')
 
         pokemon.delete()
-        return DeletePokemon(pokemon_id=track_id)
+        return DeletePokemon(pokemon_id=pokemon_id)
 
 
 class Mutation(graphene.ObjectType):
