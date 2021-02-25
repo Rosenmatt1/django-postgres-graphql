@@ -8,13 +8,20 @@ class PokemonType(DjangoObjectType):
     class Meta:
         model = Pokemon
 
+class LikeType(DjangoObjectType):
+    class Meta:
+        model = LikedPokemon
+
 
 class Query(graphene.ObjectType):
     pokemon = graphene.List(PokemonType)
+    likes = graphene.List(LikeType)
 
     def resolve_pokemon(self, info):
-
         return Pokemon.objects.all()
+    
+    def resolve_likes(self, info):
+        return LikedPokemon.objects.all()
 
 
 class CreatePokemon(graphene.Mutation):
