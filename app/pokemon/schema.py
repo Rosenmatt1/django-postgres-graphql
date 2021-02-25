@@ -1,5 +1,6 @@
 import graphene
 from graphene_django import DjangoObjectType
+from graphql import GraphQLError 
 
 from .models import Pokemon, LikedPokemon
 from users.schema import UserType
@@ -36,7 +37,7 @@ class CreatePokemon(graphene.Mutation):
         user = info.context.user
 
         if user.is_anonymous:
-            raise Exception('Log in to add Pokemon')
+            raise GraphQLError('Log in to add Pokemon')
 
         pokemon = Pokemon(name=name, abilities=abilities, power_level=power_level, posted_by=user)
         pokemon.save()
@@ -58,7 +59,7 @@ class UpdatePokemon(graphene.Mutation):
         pokemon = Pokemon.objects.get(id=pokemon_id)
 
         if pokemon.posted_by != user:
-            raise Exception('Not permitted to update Pokemon')
+            raise GraphQLError('Not permitted to update Pokemon')
 
         pokemon.name = name
         pokemon.abilities = abilities
@@ -78,7 +79,7 @@ class DeletePokemon(graphene.Mutation):
         pokemon = Pokemon.objects.get(id=pokemon_id)
 
         if pokemon.posted_by != user:
-            raise Exception('Not permitted to delete this track')
+            raise GraphQLError('Not permitted to delete this track')
 
         pokemon.delete()
         return DeletePokemon(pokemon_id=pokemon_id)
@@ -96,10 +97,10 @@ class CreateLike(graphene.Mutation):
         pokemon = Pokemon.objects.get(id=pokemon_id)
 
         if user.is_anonymous:
-            raise Exception('Log in to like a pokemon')
+            raise GraphQLError('Log in to like a pokemon')
     
         if not pokemon:
-            raise Exception('Cannot not find pokemon with given pokemon id')
+            raise GraphQLError('Cannot not find pokemon with given pokemon id')
 
         LikedPokemon.objects.create(
         user=user,
