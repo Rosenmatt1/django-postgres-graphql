@@ -2,6 +2,15 @@
   text-align: center;
 }
 
+
+
+.counter {
+  height: 100px;
+  width: 200px;
+  /* text-align: right; */
+  background-color: green;
+}
+
 .cards-grid {
   display: flex;
   justify-content: center;
@@ -12,4 +21,9 @@
   width: 250px;
   margin: 20px;
   background-color: pink;
+}
+.reset {
+  height: 100px;
+  width: 200px;
+  background-color: red;
 }
