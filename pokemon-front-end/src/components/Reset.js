@@ -11,8 +11,10 @@ function Reset() {
 //   });
 
   return (
-    <div className="reset">
-      Reset
+    <div className="resetContainer">
+        <div className="reset">
+            Reset
+        </div>
     </div>
   );
 }

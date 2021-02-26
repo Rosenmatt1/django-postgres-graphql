@@ -11,9 +11,11 @@ function Counter() {
 //   });
 
   return (
-    <div className="counter">
-      Cards Left
-    total card value to be added
+    <div className="counterContainer">
+      <div className="counter">
+        Cards Left
+        total card value to be added
+      </div>
     </div>
   );
 }

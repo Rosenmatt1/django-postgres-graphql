@@ -2,7 +2,11 @@
   text-align: center;
 }
 
-
+.counterContainer {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
 
 .counter {
   height: 100px;
@@ -22,6 +26,13 @@
   margin: 20px;
   background-color: pink;
 }
+
+.resetContainer {
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end
+}
+
 .reset {
   height: 100px;
   width: 200px;
