@@ -11,7 +11,7 @@
 .counter {
   height: 100px;
   width: 200px;
-  /* text-align: right; */
+  margin-top: 20px;
   background-color: green;
 }
 
@@ -36,5 +36,6 @@
 .reset {
   height: 100px;
   width: 200px;
+  margin-right: 20px;
   background-color: red;
 }
