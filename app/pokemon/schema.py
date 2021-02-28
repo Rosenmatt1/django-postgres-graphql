@@ -2,6 +2,7 @@ import graphene
 from graphene_django import DjangoObjectType
 from graphql import GraphQLError 
 
+from django.db.models import Q  #allows to make more complex qeueries  
 from .models import Pokemon, LikedPokemon
 from users.schema import UserType
 
@@ -15,11 +16,21 @@ class LikeType(DjangoObjectType):
 
 
 class Query(graphene.ObjectType):
-    pokemon = graphene.List(PokemonType)
+    pokemon = graphene.List(PokemonType, search=graphene.String())
     likes = graphene.List(LikeType)
 
-    def resolve_pokemon(self, info):
-        return Pokemon.objects.all()
+    def resolve_pokemon(self, info, search=None):
+        if search:
+            filter = (
+                Q(name__icontains=search) |
+                Q(abilities__icontains=search) |
+                Q(power_level__icontains=search) |
+                Q(posted_by__username__icontains=search) #the __ is a way to burrow down into a object like . in JavaScript
+            )
+            return Pokemon.objects.filter(filter)  
+            #also is starts with exact(case sensitive exact match), iexact(case insensitive exact match), gt(greater than)
+
+            return Pokemon.objects.all()
     
     def resolve_likes(self, info):
         return LikedPokemon.objects.all()
@@ -108,6 +119,12 @@ class CreateLike(graphene.Mutation):
         )
 
         return CreateLike(user=user, pokemon=pokemon)
+
+
+# ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth"]
+# Deal removes 5 random strings from array
+# Card counter - How many cards left
+# Reset - Resets back to orinal array
 
 
 class Mutation(graphene.ObjectType):
