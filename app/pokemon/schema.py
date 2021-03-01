@@ -3,7 +3,7 @@ from graphene_django import DjangoObjectType
 from graphql import GraphQLError 
 
 from django.db.models import Q  #allows to make more complex qeueries  
-from .models import Pokemon, LikedPokemon
+from .models import Pokemon, LikedPokemon, Battle
 from users.schema import UserType
 
 class PokemonType(DjangoObjectType):
@@ -14,10 +14,14 @@ class LikeType(DjangoObjectType):
     class Meta:
         model = LikedPokemon
 
+class BattleType(DjangoObjectType):
+    class Meta:
+        model = Battle
 
 class Query(graphene.ObjectType):
     pokemon = graphene.List(PokemonType, search=graphene.String())
     likes = graphene.List(LikeType)
+    battle = graphene.List(BattleType)
 
     def resolve_pokemon(self, info, search=None):
         if search:
@@ -34,6 +38,9 @@ class Query(graphene.ObjectType):
     
     def resolve_likes(self, info):
         return LikedPokemon.objects.all()
+    
+    def resolve_battle(self, info):
+        return Battle.objects.all()
 
 
 class CreatePokemon(graphene.Mutation):

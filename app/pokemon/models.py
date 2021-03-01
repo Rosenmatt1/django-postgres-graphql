@@ -13,6 +13,10 @@ class Pokemon(models.Model):
     #null=True allows for migrations to be compatible with Django version 2
     #on_delete=models.CASCADE if  User is deleted, the pokemon it created will also be deleted
 
+class Battle(models.Model):
+    user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
+    
+
 class LikedPokemon(models.Model):
     user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
     pokemon = models.ForeignKey('pokemon.Pokemon', related_name='likedPokemon', on_delete=models.CASCADE)  #the pokemon in pokemon.Pokemon is referring to the app
