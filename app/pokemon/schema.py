@@ -24,16 +24,15 @@ class Query(graphene.ObjectType):
     battle = graphene.List(BattleType)
 
     def resolve_pokemon(self, info, search=None):
-        if search:
-            filter = (
-                Q(name__icontains=search) |
-                Q(abilities__icontains=search) |
-                Q(power_level__icontains=search) |
-                Q(posted_by__username__icontains=search) #the __ is a way to burrow down into a object like . in JavaScript
-            )
-            return Pokemon.objects.filter(filter)  
+        # if search:
+        #     filter = (
+        #         Q(name__icontains=search) |
+        #         Q(abilities__icontains=search) |
+        #         Q(power_level__icontains=search) |
+        #         Q(posted_by__username__icontains=search) #the __ is a way to burrow down into a object like . in JavaScript
+        #     )
+        #     return Pokemon.objects.filter(filter)  
             #also is starts with exact(case sensitive exact match), iexact(case insensitive exact match), gt(greater than)
-
             return Pokemon.objects.all()
     
     def resolve_likes(self, info):
