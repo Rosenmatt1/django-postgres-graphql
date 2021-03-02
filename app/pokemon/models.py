@@ -14,8 +14,16 @@ class Pokemon(models.Model):
     #on_delete=models.CASCADE if  User is deleted, the pokemon it created will also be deleted
 
 
-class Battle(models.Model):
-    user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
+# class Battle(models.Model):
+#     name = models.CharField(max_length=50)
+#     # user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
+
+
+class Card(models.Model):
+    name = models.CharField(max_length=10)
+    suit = models.CharField(max_length=10)
+    color = models.CharField(max_length=10)
+    # user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
     
 
 class LikedPokemon(models.Model):

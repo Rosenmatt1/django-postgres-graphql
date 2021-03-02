@@ -3,7 +3,7 @@ from graphene_django import DjangoObjectType
 from graphql import GraphQLError 
 
 from django.db.models import Q  #allows to make more complex qeueries  
-from .models import Pokemon, LikedPokemon, Battle
+from .models import Pokemon, LikedPokemon, Battle, Card
 from users.schema import UserType
 
 class PokemonType(DjangoObjectType):
@@ -14,14 +14,14 @@ class LikeType(DjangoObjectType):
     class Meta:
         model = LikedPokemon
 
-class BattleType(DjangoObjectType):
-    class Meta:
-        model = Battle
+# class BattleType(DjangoObjectType):
+#     class Meta:
+#         model = Battle
 
 class Query(graphene.ObjectType):
     pokemon = graphene.List(PokemonType, search=graphene.String())
     likes = graphene.List(LikeType)
-    battle = graphene.List(BattleType)
+    battle = graphene.List(BattleType, all_Pokemon=graphene.List())
 
     def resolve_pokemon(self, info, search=None):
         # if search:
@@ -38,8 +38,62 @@ class Query(graphene.ObjectType):
     def resolve_likes(self, info):
         return LikedPokemon.objects.all()
     
-    def resolve_battle(self, info):
-        return Battle.objects.all()
+    # def resolve_battle(self, info, all_Pokemon=["Bulbasaur","Ivysaur","Venusaur","Charmander"]):
+    #     return Battle.objects.all()
+
+
+    # ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth"]
+
+        # Pokemon.objects.create(
+        # all_pokemon=all_pokemon
+        # )
+
+    #     class Query(ObjectType):
+    # some_func = Field(SomeObjectType, args={'value': graphene.List(graphene.String)})
+
+# class ArticleType(DjangoObjectType):
+#     tag_list = graphene.List(graphene.String)
+
+#     class Meta:
+#          model = Article
+
+#     def resolve_tag_list(self, info):
+#          return [tag.tag for tag in self.tags.all()]
+
+# ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth"]
+# Deal removes 5 random strings from array
+# Card counter - How many cards left
+# Reset - Resets back to orinal array
+
+    # class ArticleType(DjangoObjectType):
+    # tag_list = graphene.List(graphene.String)
+
+    # class Meta:
+    #      model = Article
+
+    # def resolve_tag_list(self, info):
+    #      return [tag.tag for tag in self.tags.all()]
+
+# class UpdateBattle(graphene.Mutation):
+#     pokemon = graphene.Field(BattleType)
+#     # pokemon_list = graphene.List(graphene.String)
+
+#     class Arguments:
+#         # track_id = graphene.Int(required=True)
+#         pokemon_list = graphene.List(graphene.String)
+      
+
+#     def mutate(self, info, pokemon_list):
+#         # user = info.context.user
+#         pokemon = Pokemon.objects.get()
+
+#         # if track.posted_by != user:
+#         #     raise Exception('Not permitted to update this track')
+
+#         for poke in pokemon_list
+#             pokemon = poke.name
+#             pokemon.save()
+#         return UpdateBattle(pokemon=pokemon)
 
 
 class CreatePokemon(graphene.Mutation):
@@ -126,11 +180,6 @@ class CreateLike(graphene.Mutation):
 
         return CreateLike(user=user, pokemon=pokemon)
 
-
-# ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth"]
-# Deal removes 5 random strings from array
-# Card counter - How many cards left
-# Reset - Resets back to orinal array
 
 
 class Mutation(graphene.ObjectType):

@@ -15,37 +15,37 @@ function App() {
   return (
     <div className="App">
 
-      {/* <Query query={GET_POKEMON_QUERY} >
+      <Query query={GET_POKEMON_QUERY} >
         {({ data, loading, error }) => {
-          if (loading) return <div>Loading</div>
+          if (loading || !data) return <div>Loading</div>
           if (error) return <div>Error</div>
           // console.log(data.pokemon[0].name)
 
           return <div>{JSON.stringify(data)}</div>
 
         }}
-      </Query> */}
+      </Query>
 
       <Counter />
       <PokemonCards />
       <Reset />
 
-      <Test />
+      {/* <Test /> */}
 
     </div>
   );
 }
 
-// const GET_POKEMON_QUERY = gql`
-//     {
-//         pokemon {
-//             id 
-//             name
-//             abilities 
-//             powerLevel
-//         }
-//     }
-// `
+const GET_POKEMON_QUERY = gql`
+    {
+        pokemon {
+            id 
+            name
+            abilities 
+            powerLevel
+        }
+    }
+`
 
 
 // const UPDATE_TRACK_MUTATION = gql`
