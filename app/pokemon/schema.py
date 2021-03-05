@@ -1,9 +1,11 @@
 import graphene
 from graphene_django import DjangoObjectType
 from graphql import GraphQLError 
+# from data import all_cards
+# import data
 
 from django.db.models import Q  #allows to make more complex qeueries  
-from .models import Pokemon, LikedPokemon, Battle, Card
+from .models import Pokemon, LikedPokemon, Card
 from users.schema import UserType
 
 class PokemonType(DjangoObjectType):
@@ -18,10 +20,15 @@ class LikeType(DjangoObjectType):
 #     class Meta:
 #         model = Battle
 
+class CardType(DjangoObjectType):
+    class Meta:
+        model = Card
+
 class Query(graphene.ObjectType):
     pokemon = graphene.List(PokemonType, search=graphene.String())
     likes = graphene.List(LikeType)
-    battle = graphene.List(BattleType, all_Pokemon=graphene.List())
+    # battle = graphene.List(BattleType, all_Pokemon=graphene.List())
+    cards = graphene.List(PokemonType)
 
     def resolve_pokemon(self, info, search=None):
         # if search:
@@ -41,6 +48,93 @@ class Query(graphene.ObjectType):
     # def resolve_battle(self, info, all_Pokemon=["Bulbasaur","Ivysaur","Venusaur","Charmander"]):
     #     return Battle.objects.all()
 
+    def resolve_cards(self, info):
+        # print(data.all_cards)
+        return Card.objects.all()
+
+
+class MakeDeck(graphene.Mutation):
+    card = graphene.Field(Card)
+
+    class Arguments:
+        name = graphene.String()
+        suit = graphene.String()
+        color = graphene.String()
+
+    def mutate(self, info):
+        # user = info.context.user
+        # if user.is_anonymous:
+        #     raise GraphQLError('Please Log in')
+        all_cards = {
+            "AH": {
+                "name": "Ace",
+                "suit": "Hearts",
+                "color": "red"
+            },
+            "QH": {
+                "name": "Queen",
+                "suit": "Hearts",
+                "color": "red"
+
+            },
+             "JH": {
+                "name": "Jack",
+                "suit": "Hearts",
+                "color": "red"
+            },
+            "10H": {
+                "name": "10",
+                "suit": "Hearts",
+                "color": "red"
+            },
+            "9H": {
+                "name": "9",
+                "suit": "Hearts",
+                "color": "red"
+            },
+            "8H": {
+                "name": "8",
+                "suit": "Hearts",
+                "color": "red"
+            },
+            "7H": {
+                "name": "7",
+                "suit": "Hearts",
+                "color": "red"
+            },
+            "6H": {
+                "name": "6",
+                "suit": "Hearts",
+                "color": "red"
+            },
+            "5H": {
+                "name": "5",
+                "suit": "Hearts",
+                "color": "red"
+            },
+            "4H": {
+                "name": "4",
+                "suit": "Hearts",
+                "color": "red"
+            },
+            "3H": {
+                "name": "3",
+                "suit": "Hearts",
+                "color": "red"
+            },
+            "2H": {
+                "name": "2",
+                "suit": "Hearts",
+                "color": "red"
+            }
+        }
+        # for attr, value in k.__dict__.items():
+        for attr, value in all_cards.items():
+            print(value['name'])
+            card = Card(name=value['name'], suit=value['suit'], color=value['color'])
+            card.save()
+            return MakeDeck(card=card)
+            
 
     # ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth"]
 
@@ -187,5 +281,6 @@ class Mutation(graphene.ObjectType):
     update_pokemon = UpdatePokemon.Field()
     delete_pokemon = DeletePokemon.Field()
     create_like = CreateLike.Field()
+    make_deck = MakeDeck.Field()
 
     
