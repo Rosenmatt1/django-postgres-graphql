@@ -3,6 +3,8 @@ import PokemonCards from './components/PokemonCards.js'
 import Counter from './components/Counter.js'
 import Reset from './components/Reset.js'
 import Test from './components/Test.js'
+import Loader from './components/Shared/Loader.js'
+import Error from './components/Shared/Error.js'
 
 import { Query, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
@@ -17,8 +19,8 @@ function App() {
 
       <Query query={GET_POKEMON_QUERY} >
         {({ data, loading, error }) => {
-          if (loading || !data) return <div>Loading</div>
-          if (error) return <div>Error</div>
+          if (loading || !data) return <Loader />
+          if (error) return <Error />
           // console.log(data.pokemon[0].name)
 
           return <div>{JSON.stringify(data)}</div>

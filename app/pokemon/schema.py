@@ -28,7 +28,7 @@ class Query(graphene.ObjectType):
     pokemon = graphene.List(PokemonType, search=graphene.String())
     likes = graphene.List(LikeType)
     # battle = graphene.List(BattleType, all_Pokemon=graphene.List())
-    cards = graphene.List(PokemonType)
+    cards = graphene.List(CardType)
 
     def resolve_pokemon(self, info, search=None):
         # if search:
