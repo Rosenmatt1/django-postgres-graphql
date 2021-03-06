@@ -61,7 +61,7 @@ class MakeDeck(graphene.Mutation):
         suit = graphene.String()
         color = graphene.String()
 
-    def mutate(self, info):
+    def mutate(self, info, name, suit, color):
         # user = info.context.user
         # if user.is_anonymous:
         #     raise GraphQLError('Please Log in')

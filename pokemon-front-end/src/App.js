@@ -24,7 +24,6 @@ function App() {
           // console.log(data.pokemon[0].name)
 
           return <div>{JSON.stringify(data)}</div>
-
         }}
       </Query>
 
@@ -33,7 +32,6 @@ function App() {
       <Reset />
 
       {/* <Test /> */}
-
     </div>
   );
 }
