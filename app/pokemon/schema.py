@@ -25,12 +25,12 @@ class CardType(DjangoObjectType):
         model = Card
 
 class Query(graphene.ObjectType):
-    pokemon = graphene.List(PokemonType, search=graphene.String())
+    pokemon = graphene.List(PokemonType)
     likes = graphene.List(LikeType)
     # battle = graphene.List(BattleType, all_Pokemon=graphene.List())
-    cards = graphene.List(CardType)
+    # cards = graphene.List(CardType)
 
-    def resolve_pokemon(self, info, search=None):
+    def resolve_pokemon(self, info):
         # if search:
         #     filter = (
         #         Q(name__icontains=search) |
@@ -48,92 +48,92 @@ class Query(graphene.ObjectType):
     # def resolve_battle(self, info, all_Pokemon=["Bulbasaur","Ivysaur","Venusaur","Charmander"]):
     #     return Battle.objects.all()
 
-    def resolve_cards(self, info):
-        # print(data.all_cards)
-        return Card.objects.all()
+    # def resolve_cards(self, info):
+    #     # print(data.all_cards)
+    #     return Card.objects.all()
 
 
-class MakeDeck(graphene.Mutation):
-    card = graphene.Field(Card)
+# class MakeDeck(graphene.Mutation):
+#     card = graphene.Field(Card)
 
-    class Arguments:
-        name = graphene.String()
-        suit = graphene.String()
-        color = graphene.String()
+#     class Arguments:
+#         name = graphene.String()
+#         suit = graphene.String()
+#         color = graphene.String()
 
-    def mutate(self, info, name, suit, color):
-        # user = info.context.user
-        # if user.is_anonymous:
-        #     raise GraphQLError('Please Log in')
-        all_cards = {
-            "AH": {
-                "name": "Ace",
-                "suit": "Hearts",
-                "color": "red"
-            },
-            "QH": {
-                "name": "Queen",
-                "suit": "Hearts",
-                "color": "red"
+#     def mutate(self, info, name, suit, color):
+#         # user = info.context.user
+#         # if user.is_anonymous:
+#         #     raise GraphQLError('Please Log in')
+#         all_cards = {
+#             "AH": {
+#                 "name": "Ace",
+#                 "suit": "Hearts",
+#                 "color": "red"
+#             },
+#             "QH": {
+#                 "name": "Queen",
+#                 "suit": "Hearts",
+#                 "color": "red"
 
-            },
-             "JH": {
-                "name": "Jack",
-                "suit": "Hearts",
-                "color": "red"
-            },
-            "10H": {
-                "name": "10",
-                "suit": "Hearts",
-                "color": "red"
-            },
-            "9H": {
-                "name": "9",
-                "suit": "Hearts",
-                "color": "red"
-            },
-            "8H": {
-                "name": "8",
-                "suit": "Hearts",
-                "color": "red"
-            },
-            "7H": {
-                "name": "7",
-                "suit": "Hearts",
-                "color": "red"
-            },
-            "6H": {
-                "name": "6",
-                "suit": "Hearts",
-                "color": "red"
-            },
-            "5H": {
-                "name": "5",
-                "suit": "Hearts",
-                "color": "red"
-            },
-            "4H": {
-                "name": "4",
-                "suit": "Hearts",
-                "color": "red"
-            },
-            "3H": {
-                "name": "3",
-                "suit": "Hearts",
-                "color": "red"
-            },
-            "2H": {
-                "name": "2",
-                "suit": "Hearts",
-                "color": "red"
-            }
-        }
-        # for attr, value in k.__dict__.items():
-        for attr, value in all_cards.items():
-            print(value['name'])
-            card = Card(name=value['name'], suit=value['suit'], color=value['color'])
-            card.save()
-            return MakeDeck(card=card)
+#             },
+#              "JH": {
+#                 "name": "Jack",
+#                 "suit": "Hearts",
+#                 "color": "red"
+#             },
+#             "10H": {
+#                 "name": "10",
+#                 "suit": "Hearts",
+#                 "color": "red"
+#             },
+#             "9H": {
+#                 "name": "9",
+#                 "suit": "Hearts",
+#                 "color": "red"
+#             },
+#             "8H": {
+#                 "name": "8",
+#                 "suit": "Hearts",
+#                 "color": "red"
+#             },
+#             "7H": {
+#                 "name": "7",
+#                 "suit": "Hearts",
+#                 "color": "red"
+#             },
+#             "6H": {
+#                 "name": "6",
+#                 "suit": "Hearts",
+#                 "color": "red"
+#             },
+#             "5H": {
+#                 "name": "5",
+#                 "suit": "Hearts",
+#                 "color": "red"
+#             },
+#             "4H": {
+#                 "name": "4",
+#                 "suit": "Hearts",
+#                 "color": "red"
+#             },
+#             "3H": {
+#                 "name": "3",
+#                 "suit": "Hearts",
+#                 "color": "red"
+#             },
+#             "2H": {
+#                 "name": "2",
+#                 "suit": "Hearts",
+#                 "color": "red"
+#             }
+#         }
+#         # for attr, value in k.__dict__.items():
+#         for attr, value in all_cards.items():
+#             print(value['name'])
+#             card = Card(name=value['name'], suit=value['suit'], color=value['color'])
+#             card.save()
+#             return MakeDeck(card=card)
             
 
     # ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth"]
@@ -234,20 +234,34 @@ class UpdatePokemon(graphene.Mutation):
 
 
 class DeletePokemon(graphene.Mutation):
-    pokemon_id = graphene.Int()
+    # pokemon_id = graphene.Int()
+    pokemon_id1 = graphene.Int()
+    pokemon_id2 = graphene.Int()
+
 
     class Arguments:
-        pokemon_id = graphene.Int(required=True)
+        # pokemon_id = graphene.Int(required=True)
+        pokemon_id1 = graphene.Int(required=True)
+        pokemon_id2 = graphene.Int(required=True)
 
-    def mutate(self, info, pokemon_id):
+    def mutate(self, info, pokemon_id1, pokemon_id2):
         user = info.context.user
-        pokemon = Pokemon.objects.get(id=pokemon_id)
+        # pokemon = Pokemon.objects.get(id=pokemon_id)
+        pokemon1 = Pokemon.objects.get(id=pokemon_id1)
+        pokemon2 = Pokemon.objects.get(id=pokemon_id2)
 
-        if pokemon.posted_by != user:
+        # if pokemon.posted_by != user:
+        #     raise GraphQLError('Not permitted to delete this track')
+
+        if pokemon1.posted_by != user:
+            raise GraphQLError('Not permitted to delete this track')
+        if pokemon2.posted_by != user:
             raise GraphQLError('Not permitted to delete this track')
 
-        pokemon.delete()
-        return DeletePokemon(pokemon_id=pokemon_id)
+        # pokemon.delete()
+        pokemon1.delete()
+        pokemon2.delete()
+        return DeletePokemon(pokemon_id1=pokemon_id1, pokemon_id2=pokemon_id2)
 
 
 class CreateLike(graphene.Mutation):
@@ -281,6 +295,6 @@ class Mutation(graphene.ObjectType):
     update_pokemon = UpdatePokemon.Field()
     delete_pokemon = DeletePokemon.Field()
     create_like = CreateLike.Field()
-    make_deck = MakeDeck.Field()
+    # make_deck = MakeDeck.Field()
 
     
