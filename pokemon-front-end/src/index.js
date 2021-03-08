@@ -4,8 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { ApolloProvider, Query } from 'react-apollo';
+import { ApolloProvider, Query, Mutation } from 'react-apollo';
 import ApolloClient, { gql } from 'apollo-boost';
+
 
 const client = new ApolloClient({
   uri: 'http://localhost:8000/graphql/',

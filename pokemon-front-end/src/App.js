@@ -6,6 +6,9 @@ import Test from './components/Test.js'
 import Loader from './components/Shared/Loader.js'
 import Error from './components/Shared/Error.js'
 
+import Register from './components/Auth/Register.js'
+import Login from './components/Auth/Login.js'
+
 import { Query, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
 // import { UserContext } from '../../Root';
@@ -16,7 +19,7 @@ import { gql } from 'apollo-boost';
 function App() {
   return (
     <div className="App">
-
+{/* 
       <Query query={GET_POKEMON_QUERY} >
         {({ data, loading, error }) => {
           if (loading || !data) return <Loader />
@@ -29,7 +32,9 @@ function App() {
 
       <Counter />
       <PokemonCards />
-      <Reset />
+      <Reset /> */}
+
+      <Login />
 
       {/* <Test /> */}
     </div>
