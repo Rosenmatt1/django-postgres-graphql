@@ -214,9 +214,9 @@ class UpdatePokemon(graphene.Mutation):
 
     class Arugments:
         pokemon_id = graphene.Int(required=True)
-        name = graphene.String()
-        abilities = graphene.String()
-        power_level = graphene.Int()
+        name = graphene.String(required=True)
+        abilities = graphene.String(required=True)
+        power_level = graphene.Int(required=True)
 
     def mutate(self, info, pokemon_id, name, abilities, power_level):
         user = info.context.user
@@ -237,7 +237,6 @@ class DeletePokemon(graphene.Mutation):
     # pokemon_id = graphene.Int()
     pokemon_id1 = graphene.Int()
     pokemon_id2 = graphene.Int()
-
 
     class Arguments:
         # pokemon_id = graphene.Int(required=True)
