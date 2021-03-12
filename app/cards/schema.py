@@ -2,39 +2,47 @@ import graphene
 from graphene_django import DjangoObjectType
 from graphql import GraphQLError 
 
-# from django.db.models import Q  #allows to make more complex qeueries  
-# from .models import Card
+from django.db.models import Q  #allows to make more complex qeueries  
+from .models import Card
 # from users.schema import UserType
 
 
-# class CardType(DjangoObjectType):
-#     class Meta:
-#         model = Card
+class CardType(DjangoObjectType):
+    class Meta:
+        model = Card
 
-# class Query(graphene.ObjectType):
-#     cards = graphene.List(CardType)
 
-#     def resolve_cards(self, info):
-#         # print(data.all_cards)
-#         return Card.objects.all()
+class Query(graphene.ObjectType):
+    cards = graphene.List(CardType)
 
-# class CreateCard(graphene.Mutation):
-#     card = graphene.Field(CardType)
+    def resolve_cards(self, info):
+        # print(data.all_cards)
+        return Card.objects.all()
 
-#     class Arguments:
-#         name = graphene.String()
-#         suit = graphene.String()
-#         color = graphene.Int()
 
-#     def mutate(self, info, name, suit, color):
-#         user = info.context.user
+class CreateCard(graphene.Mutation):
+    card = graphene.Field(CardType)
 
-#         if user.is_anonymous:
-#             raise GraphQLError('Log in to create card')
+    class Arguments:
+        name = graphene.String()
+        suit = graphene.String()
+        color = graphene.String()
+        # active = graphene.Boolean()
+        # used = graphene.Boolean()
 
-#         card = Card(name=name, suit=suit, color=color)
-#         card.save()
-#         return CreateCard(card=card)
+    def mutate(self, info, name, suit, color):
+        # user = info.context.user
+
+        # if user.is_anonymous:
+        #     raise GraphQLError('Log in to create card')
+
+        card = Card(name=name, suit=suit, color=color)
+        card.save()
+        return CreateCard(card=card)
+
+
+class Mutation(graphene.ObjectType):
+    create_card = CreateCard.Field()
 
 
 # class Mutation(graphene.ObjectType):

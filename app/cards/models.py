@@ -4,11 +4,12 @@ from django.contrib.auth import get_user_model
 
 # # Create your models here.
 
-# class Card(models.Model):
-#     name = models.CharField(max_length=10)
-#     suit = models.CharField(max_length=10)
-#     color = models.CharField(max_length=10)
-#     # user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
+class Card(models.Model):
+    name = models.CharField(max_length=10)
+    suit = models.CharField(max_length=10)
+    color = models.CharField(max_length=10)
+    active = models.BooleanField(default=False)
+    used = models.BooleanField(default=False)
 
 
 # class DealerDeck(models.Model):
