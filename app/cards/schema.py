@@ -3,7 +3,7 @@ from graphene_django import DjangoObjectType
 from graphql import GraphQLError 
 
 from django.db.models import Q  #allows to make more complex qeueries  
-from .models import Card
+from .models import Card, DealHand
 # from users.schema import UserType
 
 
@@ -11,11 +11,19 @@ class CardType(DjangoObjectType):
     class Meta:
         model = Card
 
+class DealType(DjangoObjectType):
+    class Meta:
+        model = DealHand
+
 
 class Query(graphene.ObjectType):
     cards = graphene.List(CardType)
 
     def resolve_cards(self, info):
+        # print(data.all_cards)
+        return Card.objects.all()
+    
+    def resolve_deal(self, info):
         # print(data.all_cards)
         return Card.objects.all()
 
@@ -27,26 +35,46 @@ class CreateCard(graphene.Mutation):
         name = graphene.String()
         suit = graphene.String()
         color = graphene.String()
-        # active = graphene.Boolean()
-        # used = graphene.Boolean()
 
     def mutate(self, info, name, suit, color):
-        # user = info.context.user
-
-        # if user.is_anonymous:
-        #     raise GraphQLError('Log in to create card')
-
         card = Card(name=name, suit=suit, color=color)
         card.save()
         return CreateCard(card=card)
 
 
+class DealHand(graphene.Mutation):
+    # user = graphene.Field(UserType)
+    card = graphene.Field(CardType)
+
+    class Arguments:
+        cards = Card.objects.get()
+        card1 = 
+    
+    def mutate():
+        # user = info.context.user
+
+    # Update
+        card1.active = True
+        card1.save()
+        return Dealhand(card1=card1)
+
+
+    #       # Create Pokemon
+    # DealHand.objects.create(
+    #     user=user,
+    #     pokemon=pokemon
+    #     )
+    
+    # # Create
+    # pokemon = Pokemon(name=name, abilities=abilities, power_level=power_level, posted_by=user)
+    #     pokemon.save()
+    #     return CreatePokemon(pokemon=pokemon)
+
+
 class Mutation(graphene.ObjectType):
     create_card = CreateCard.Field()
+    deal_hand = DealHand.Field()
 
-
-# class Mutation(graphene.ObjectType):
-    # make_deck = MakeDeck.Field()
 
 
 # class MakeDeck(graphene.Mutation):

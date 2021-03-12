@@ -12,13 +12,24 @@ class Card(models.Model):
     used = models.BooleanField(default=False)
 
 
+class DealHand(models.Model):
+    user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
+    card = models.ForeignKey('cards.Card', related_name='DealHand', on_delete=models.CASCADE)
+    reset = models.BooleanField(default=False)
+    cards_left = models.IntegerField(default=52)
+
+
 # class DealerDeck(models.Model):
 #     card = models.ForeignKey('cards.Card', related_name='DealerDeck', on_delete=models.CASCADE)
 #     reset = models.BooleanField(default=False)
 #     cards_left = models.IntegerField(default=52)
 
+
+
+
 # # What does this field do?
 # # related_name='likedPokemon',
+
 
 # class UserHand(models.Model):
 #     user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
