@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'graphene_django',
     'pokemon',
     'users',
-    'cards',
 ]
 
 GRAPHENE = {

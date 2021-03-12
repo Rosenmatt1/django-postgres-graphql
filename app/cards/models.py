@@ -2,26 +2,26 @@ from django.db import models
 
 from django.contrib.auth import get_user_model
 
-# Create your models here.
+# # Create your models here.
 
-class Card(models.Model):
-    name = models.CharField(max_length=10)
-    suit = models.CharField(max_length=10)
-    color = models.CharField(max_length=10)
-    # user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
+# class Card(models.Model):
+#     name = models.CharField(max_length=10)
+#     suit = models.CharField(max_length=10)
+#     color = models.CharField(max_length=10)
+#     # user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
 
 
-class DealerDeck(models.Model):
-    card = models.ForeignKey('cards.Card', on_delete=models.CASCADE)
-    reset = models.BooleanField(default=False)
-    cards_left = models.IntegerField(default=52)
+# class DealerDeck(models.Model):
+#     card = models.ForeignKey('cards.Card', related_name='DealerDeck', on_delete=models.CASCADE)
+#     reset = models.BooleanField(default=False)
+#     cards_left = models.IntegerField(default=52)
 
-# What does this field do?
-# related_name='likedPokemon',
+# # What does this field do?
+# # related_name='likedPokemon',
 
-class UserHand(models.Model):
-    user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
-    card = models.ForeignKey('cards.Card', on_delete=models.CASCADE)
+# class UserHand(models.Model):
+#     user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
+#     card = models.ForeignKey('cards.Card', related_name='UserHand', on_delete=models.CASCADE)
 
 
 # The __str__ method just tells Django what to print when it needs to print out an instance of the any model. It is also what lets your admin panel, go from this

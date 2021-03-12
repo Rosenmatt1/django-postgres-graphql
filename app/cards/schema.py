@@ -1,24 +1,44 @@
 import graphene
 from graphene_django import DjangoObjectType
 from graphql import GraphQLError 
-# from data import all_cards
-# import data
 
-from django.db.models import Q  #allows to make more complex qeueries  
-from .models import Card
-from users.schema import UserType
+# from django.db.models import Q  #allows to make more complex qeueries  
+# from .models import Card
+# from users.schema import UserType
 
 
-class CardType(DjangoObjectType):
-    class Meta:
-        model = Card
+# class CardType(DjangoObjectType):
+#     class Meta:
+#         model = Card
 
-class Query(graphene.ObjectType):
-    cards = graphene.List(CardType)
+# class Query(graphene.ObjectType):
+#     cards = graphene.List(CardType)
 
-    def resolve_cards(self, info):
-        # print(data.all_cards)
-        return Card.objects.all()
+#     def resolve_cards(self, info):
+#         # print(data.all_cards)
+#         return Card.objects.all()
+
+# class CreateCard(graphene.Mutation):
+#     card = graphene.Field(CardType)
+
+#     class Arguments:
+#         name = graphene.String()
+#         suit = graphene.String()
+#         color = graphene.Int()
+
+#     def mutate(self, info, name, suit, color):
+#         user = info.context.user
+
+#         if user.is_anonymous:
+#             raise GraphQLError('Log in to create card')
+
+#         card = Card(name=name, suit=suit, color=color)
+#         card.save()
+#         return CreateCard(card=card)
+
+
+# class Mutation(graphene.ObjectType):
+    # make_deck = MakeDeck.Field()
 
 
 # class MakeDeck(graphene.Mutation):
@@ -156,6 +176,3 @@ class Query(graphene.ObjectType):
 #             pokemon = poke.name
 #             pokemon.save()
 #         return UpdateBattle(pokemon=pokemon)
-
-class Mutation(graphene.ObjectType):
-    # make_deck = MakeDeck.Field()
