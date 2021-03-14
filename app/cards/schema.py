@@ -3,7 +3,7 @@ from graphene_django import DjangoObjectType
 from graphql import GraphQLError 
 
 from django.db.models import Q  #allows to make more complex qeueries  
-from .models import Card, DealHand
+from .models import Card#, DealHand
 # from users.schema import UserType
 
 
@@ -11,9 +11,9 @@ class CardType(DjangoObjectType):
     class Meta:
         model = Card
 
-class DealType(DjangoObjectType):
-    class Meta:
-        model = DealHand
+# class DealType(DjangoObjectType):
+#     class Meta:
+#         model = DealHand
 
 
 class Query(graphene.ObjectType):
@@ -23,9 +23,9 @@ class Query(graphene.ObjectType):
         # print(data.all_cards)
         return Card.objects.all()
     
-    def resolve_deal(self, info):
-        # print(data.all_cards)
-        return Card.objects.all()
+    # def resolve_deal(self, info):
+    #     # print(data.all_cards)
+    #     return Card.objects.all()
     # *****The Query can be a filter***
 
 
@@ -43,13 +43,14 @@ class CreateCard(graphene.Mutation):
         return CreateCard(card=card)
 
 
-class DealHand(graphene.Mutation):
-    # card1 = graphene.Field(CardType)
-    def mutate(self, info):
-        cards = Card.objects.get()
-        total = cards.length
-        print(total)
-        return Dealhand(total)
+# class DealHand(graphene.Mutation):
+#     # card1 = graphene.Field(CardType)
+#     def mutate(self, info):
+#         cards = Card.objects.get()
+#         total = cards.length
+#         print(total)
+#         return Dealhand(total)
+
 
         # card1.active = True
         # card1.save()
@@ -59,6 +60,11 @@ class DealHand(graphene.Mutation):
     # class Arguments:
         # card1 ???
         # card1_id = graphene.Int(id=card_id)
+
+
+class Mutation(graphene.ObjectType):
+    create_card = CreateCard.Field()
+    # deal_hand = DealHand.Field()
     
 
     #       # Create Pokemon
@@ -88,9 +94,6 @@ class DealHand(graphene.Mutation):
 #         return CreateCard(card=card)
 
 
-class Mutation(graphene.ObjectType):
-    create_card = CreateCard.Field()
-    deal_hand = DealHand.Field()
 
 
 

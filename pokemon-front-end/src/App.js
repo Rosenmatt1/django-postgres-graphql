@@ -19,8 +19,8 @@ import { gql } from 'apollo-boost';
 function App() {
   return (
     <div className="App">
-{/* 
-      <Query query={GET_POKEMON_QUERY} >
+
+      {/* <Query query={GET_POKEMON_QUERY} >
         {({ data, loading, error }) => {
           if (loading || !data) return <Loader />
           if (error) return <Error />
@@ -28,13 +28,13 @@ function App() {
 
           return <div>{JSON.stringify(data)}</div>
         }}
-      </Query>
+      </Query> */}
 
       <Counter />
       <PokemonCards />
-      <Reset /> */}
+      <Reset /> 
 
-      <Login />
+      {/* <Login /> */}
 
       {/* <Test /> */}
     </div>
@@ -51,6 +51,7 @@ const GET_POKEMON_QUERY = gql`
         }
     }
 `
+
 
 
 // const UPDATE_TRACK_MUTATION = gql`
