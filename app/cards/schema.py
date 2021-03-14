@@ -26,6 +26,7 @@ class Query(graphene.ObjectType):
     def resolve_deal(self, info):
         # print(data.all_cards)
         return Card.objects.all()
+    # *****The Query can be a filter***
 
 
 class CreateCard(graphene.Mutation):
@@ -43,21 +44,22 @@ class CreateCard(graphene.Mutation):
 
 
 class DealHand(graphene.Mutation):
-    # user = graphene.Field(UserType)
-    card = graphene.Field(CardType)
-
-    class Arguments:
+    # card1 = graphene.Field(CardType)
+    def mutate(self, info):
         cards = Card.objects.get()
-        card1 = 
+        total = cards.length
+        print(total)
+        return Dealhand(total)
+
+        # card1.active = True
+        # card1.save()
+        # return Dealhand(card1=card1)
+
+
+    # class Arguments:
+        # card1 ???
+        # card1_id = graphene.Int(id=card_id)
     
-    def mutate():
-        # user = info.context.user
-
-    # Update
-        card1.active = True
-        card1.save()
-        return Dealhand(card1=card1)
-
 
     #       # Create Pokemon
     # DealHand.objects.create(
@@ -69,6 +71,21 @@ class DealHand(graphene.Mutation):
     # pokemon = Pokemon(name=name, abilities=abilities, power_level=power_level, posted_by=user)
     #     pokemon.save()
     #     return CreatePokemon(pokemon=pokemon)
+
+
+# this will loop through all cards and change all active and used attributes to false
+# class ResetDeck(graphene.Mutation):
+#     card = graphene.Field(CardType)
+
+#     class Arguments:
+#         active = graphene.Boolean()
+#         used = graphene.String()
+
+#     def mutate(self, info, active, used):
+#         card.active = False
+#         card.used = False
+#         card.save()
+#         return CreateCard(card=card)
 
 
 class Mutation(graphene.ObjectType):

@@ -12,6 +12,7 @@ class Card(models.Model):
     used = models.BooleanField(default=False)
 
 
+
 class DealHand(models.Model):
     user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
     card = models.ForeignKey('cards.Card', related_name='DealHand', on_delete=models.CASCADE)
