@@ -16,9 +16,9 @@ function PokemonCards() {
   // const [card5, setCard5] = useState("PokemonCard5");
 
   // Similar to componentDidMount and componentDidUpdate:
-  //   useEffect(() => {
+    // useEffect(() => {
 
-  //   });
+    // }, [cards]);
 
   return (
     <div className="cards-grid" >
@@ -27,15 +27,13 @@ function PokemonCards() {
         {({ data, loading, error }) => {
           if (loading || !data) return <Loader />
           if (error) return <Error />
-          if (data) setCards(data.cards)
-          // console.log(cards)
 
           return <div>
-            <div className="card"> {cards[0].name} </div>
-            <div className="card"> {cards[1].name} </div>
-            <div className="card"> {cards[2].name} </div>
-            <div className="card"> {cards[3].name} </div>
-            <div className="card"> {cards[4].name} </div>
+            <div className="card"> {data.cards[0].name} </div>
+            <div className="card"> {data.cards[1].name} </div>
+            <div className="card"> {data.cards[2].name} </div>
+            <div className="card"> {data.cards[3].name} </div>
+            <div className="card"> {data.cards[4].name} </div>
           </div>
         }}
       </Query>
