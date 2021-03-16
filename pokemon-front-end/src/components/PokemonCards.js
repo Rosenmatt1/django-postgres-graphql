@@ -9,11 +9,37 @@ import { gql } from 'apollo-boost';
 
 function PokemonCards() {
   const [cards, setCards] = useState([]);
-  // const [card1, setCard1] = useState("PokemonCard1");
-  // const [card2, setCard2] = useState("PokemonCard2");
-  // const [card3, setCard3] = useState("PokemonCard3");
-  // const [card4, setCard4] = useState("PokemonCard4");
-  // const [card5, setCard5] = useState("PokemonCard5");
+  const [card1, setCard1ID] = useState(null);
+  const [card2, setCard2ID] = useState(null);
+  const [card3, setCard3ID] = useState(null);
+  const [card4, setCard4ID] = useState(null);
+  const [card5, setCard5ID] = useState(null);
+
+  const generateRandomNumbers = (data) => {
+    let arrayOfIds = []
+
+    data.cards.map(card => {
+      arrayOfIds.push(parseInt(card.id))
+    })
+
+    if (arrayOfIds.length > 2) {
+      let tempIndex = null
+      for (let i = 0; i = 4; i++) {
+        tempIndex = Math.floor(Math.random() * (arrayOfIds.length))
+        console.log(tempIndex)
+      }
+    } else {
+      console.log("Check to see if Ace and show message if win or lose")
+    }
+
+    // arrayOfIds.map(index => {
+        
+    // })
+
+    // console.log(data)
+    console.log(arrayOfIds)
+    console.log("Length", data.cards.length)
+  }
 
   // Similar to componentDidMount and componentDidUpdate:
     // useEffect(() => {
@@ -27,6 +53,7 @@ function PokemonCards() {
         {({ data, loading, error }) => {
           if (loading || !data) return <Loader />
           if (error) return <Error />
+          generateRandomNumbers(data)
 
           return <div>
             <div className="card"> {data.cards[0].name} </div>
