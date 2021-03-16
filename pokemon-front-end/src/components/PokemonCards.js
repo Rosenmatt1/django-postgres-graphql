@@ -9,36 +9,52 @@ import { gql } from 'apollo-boost';
 
 function PokemonCards() {
   const [cards, setCards] = useState([]);
-  const [card1, setCard1ID] = useState(null);
-  const [card2, setCard2ID] = useState(null);
-  const [card3, setCard3ID] = useState(null);
-  const [card4, setCard4ID] = useState(null);
-  const [card5, setCard5ID] = useState(null);
+  // const [card1ID, setCard1ID] = useState(null);
+  // const [card2, setCard2ID] = useState(null);
+  // const [card3, setCard3ID] = useState(null);
+  // const [card4, setCard4ID] = useState(null);
+  // const [card5, setCard5ID] = useState(null);
 
   const generateRandomNumbers = (data) => {
     let arrayOfIds = []
+    let randomID = null
+    let findIndex = null
+
+    // console.log("Length", data.cards.length)
 
     data.cards.map(card => {
       arrayOfIds.push(parseInt(card.id))
     })
+    console.log("arrayOfIds", arrayOfIds)
 
-    if (arrayOfIds.length > 2) {
-      let tempIndex = null
-      for (let i = 0; i = 4; i++) {
-        tempIndex = Math.floor(Math.random() * (arrayOfIds.length))
-        console.log(tempIndex)
-      }
-    } else {
-      console.log("Check to see if Ace and show message if win or lose")
-    }
+    randomID = Math.floor(Math.random() * (arrayOfIds.length))
+    // setCard1ID(randomIndex)
+    console.log("randomID", randomID)
+
+    findIndex = arrayOfIds.indexOf(randomID)
+    console.log("findIndex which should be one less", findIndex)
+
+    arrayOfIds.splice(findIndex, 1)
+    console.log("arrayOfIds After Splice", arrayOfIds)
+
+    console.log("----------------------------")
+
+
+    // if (arrayOfIds.length > 2) {
+    //   let tempIndex = null
+    //   for (let i = 0; i = 4; i++) {
+    //     tempIndex = Math.floor(Math.random() * (arrayOfIds.length))
+    //     console.log(tempIndex)
+    //   }
+    // } else {
+    //   console.log("Check to see if Ace and show message if win or lose")
+    // }
 
     // arrayOfIds.map(index => {
         
     // })
 
     // console.log(data)
-    console.log(arrayOfIds)
-    console.log("Length", data.cards.length)
   }
 
   // Similar to componentDidMount and componentDidUpdate:
