@@ -2,6 +2,7 @@ import './App.css';
 import PokemonCards from './components/PokemonCards.js'
 import Counter from './components/Counter.js'
 import Reset from './components/Reset.js'
+import Deal from './components/Deal.js'
 import Test from './components/Test.js'
 import Loader from './components/Shared/Loader.js'
 import Error from './components/Shared/Error.js'
@@ -32,6 +33,7 @@ function App() {
 
       <Counter />
       <PokemonCards />
+      <Deal />
       <Reset /> 
 
       {/* <Login /> */}
