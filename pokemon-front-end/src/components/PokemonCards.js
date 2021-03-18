@@ -8,7 +8,8 @@ import { Query, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
 
-function PokemonCards() {
+function PokemonCards(data) {
+  let cards = data.data.cards
   // const [cards, setCards] = useState([]);
   // const [card1, setCard1ID] = useState(null);
   // const [card2, setCard2ID] = useState(null);
@@ -21,14 +22,13 @@ function PokemonCards() {
   //   setCard1ID(data.cards[findIndex])
   // }, data);
 
-  const generateRandomNumbers = (data) => {
+  const generateRandomNumbers = () => {
     let arrayOfIds = []
     let randomCard = null
     let findIndex = null
 
     // let randomCard = null
 
-    let cards = data.cards
     console.log("cards", cards)
     // console.log("Length", cards.length)
 
@@ -94,41 +94,19 @@ function PokemonCards() {
 
   // }, [cards]);
 
+
   return (
     <div className="cards-grid" >
-
-      <Query query={GET_ACTIVE_CARDS_QUERY} >
-        {({ data, loading, error }) => {
-          if (loading || !data) return <Loader />
-          if (error) return <Error />
-          generateRandomNumbers(data)
-
-          return <div>
-            <div className="card"> {card1.name} </div>
-            {/* <div className="card"> {data.cards[1].name} </div>
+            {/* <div className="card"> {data.cards[0].name} </div>
+            <div className="card"> {data.cards[1].name} </div>
             <div className="card"> {data.cards[2].name} </div>
             <div className="card"> {data.cards[3].name} </div>
             <div className="card"> {data.cards[4].name} </div> */}
-          </div>
-        }}
-      </Query>
-
     </div >
   );
 }
 
-const GET_ACTIVE_CARDS_QUERY = gql`
- {
-  cards {
-    id
-    name
-    suit
-    color
-    active
-    used
-  }
- }
-`
+
 
 
 export default PokemonCards

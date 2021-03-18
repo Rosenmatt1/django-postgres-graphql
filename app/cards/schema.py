@@ -18,10 +18,15 @@ class CardType(DjangoObjectType):
 
 class Query(graphene.ObjectType):
     cards = graphene.List(CardType)
+    used = graphene.List(CardType)
 
     def resolve_cards(self, info):
         # print(data.all_cards)
         return Card.objects.all()
+
+    def resolve_used(self, info):
+        # print(data.all_cards)
+        return Card.objects.filter(used=True)
     
     # def resolve_deal(self, info):
     #     # print(data.all_cards)
@@ -43,28 +48,28 @@ class CreateCard(graphene.Mutation):
         return CreateCard(card=card)
 
 
-# class DealHand(graphene.Mutation):
-#     # card1 = graphene.Field(CardType)
-#     def mutate(self, info):
-#         cards = Card.objects.get()
-#         total = cards.length
-#         print(total)
-#         return Dealhand(total)
+class DealHand(graphene.Mutation):
+    card1 = graphene.Field(CardType)
 
+    class Arguments:
+        card1_id = graphene.Int(required=True)
 
-        # card1.active = True
-        # card1.save()
-        # return Dealhand(card1=card1)
+    def mutate(self, info, card1_id):
+        card1 = Card.objects.get(id=card1_id)
+        card1.active = True
+        card1.used = True
+        card1.save()
+        return Dealhand(card1=card1)
 
-
-    # class Arguments:
-        # card1 ???
-        # card1_id = graphene.Int(id=card_id)
+        #   cards = Card.objects.get()
+        # total = cards.length
+        # print(total)
+        # return Dealhand(total)
 
 
 class Mutation(graphene.ObjectType):
     create_card = CreateCard.Field()
-    # deal_hand = DealHand.Field()
+    deal_hand = DealHand.Field()
     
 
     #       # Create Pokemon

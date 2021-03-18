@@ -1,9 +1,5 @@
 import './App.css';
-import PokemonCards from './components/PokemonCards.js'
-import Counter from './components/Counter.js'
-import Reset from './components/Reset.js'
-import Deal from './components/Deal.js'
-import Test from './components/Test.js'
+import PokerMain from './components/PokerMain.js'
 import Loader from './components/Shared/Loader.js'
 import Error from './components/Shared/Error.js'
 
@@ -13,7 +9,6 @@ import Login from './components/Auth/Login.js'
 import { Query, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
 // import { UserContext } from '../../Root';
-
 
 //Use Tailwind for styling!!!!!!
 
@@ -31,30 +26,13 @@ function App() {
         }}
       </Query> */}
 
-      <Counter />
-      <PokemonCards />
-      <Deal />
-      <Reset /> 
+      <PokerMain />
 
       {/* <Login /> */}
-
       {/* <Test /> */}
     </div>
   );
 }
-
-const GET_POKEMON_QUERY = gql`
-    {
-        pokemon {
-            id 
-            name
-            abilities 
-            powerLevel
-        }
-    }
-`
-
-
 
 // const UPDATE_TRACK_MUTATION = gql`
 //   mutation($trackId: Int!, $title: String, $url: String, $description: String) {
