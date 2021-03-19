@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import PokerMain from './components/PokerMain.js'
 import Loader from './components/Shared/Loader.js'
@@ -12,11 +13,16 @@ import { gql } from 'apollo-boost';
 
 //Use Tailwind for styling!!!!!!
 
-function App() {
-  return (
-    <div className="App">
+export const UserContext = React.createContext()
 
-      {/* <Query query={GET_POKEMON_QUERY} >
+function App() {
+  let currentUser = true  //for now
+
+  return (
+    <UserContext.Provider value={currentUser}>
+      <div className="App">
+
+        {/* <Query query={GET_POKEMON_QUERY} >
         {({ data, loading, error }) => {
           if (loading || !data) return <Loader />
           if (error) return <Error />
@@ -26,11 +32,13 @@ function App() {
         }}
       </Query> */}
 
-      <PokerMain />
+        <PokerMain />
 
-      {/* <Login /> */}
-      {/* <Test /> */}
-    </div>
+        {/* <Login /> */}
+        {/* <Test /> */}
+      </div>
+    </UserContext.Provider>
+
   );
 }
 

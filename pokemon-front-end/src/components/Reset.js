@@ -8,13 +8,6 @@ import { Query, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
 function Reset() {
-  // const [count, setCount] = useState(52);
-
-
-  // Similar to componentDidMount and componentDidUpdate:
-  //   useEffect(() => {
-
-  //   });
 
   return (
     <Mutation
