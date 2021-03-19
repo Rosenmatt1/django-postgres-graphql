@@ -61,15 +61,20 @@ class DealHand(graphene.Mutation):
         card1.save()
         return Dealhand(card1=card1)
 
-        #   cards = Card.objects.get()
-        # total = cards.length
-        # print(total)
-        # return Dealhand(total)
+
+class ResetDeck(graphene.Mutation):
+    card = graphene.Field(CardType)
+
+    def mutate(self, info): 
+        cards = Card.objects.all().update(used=False, active=False)
+        return ResetDeck()
+
 
 
 class Mutation(graphene.ObjectType):
     create_card = CreateCard.Field()
     deal_hand = DealHand.Field()
+    reset_deck = ResetDeck.Field()
     
 
     #       # Create Pokemon
