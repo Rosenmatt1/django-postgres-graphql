@@ -13,31 +13,22 @@ import { gql } from 'apollo-boost';
 
 //Use Tailwind for styling!!!!!!
 
-export const UserContext = React.createContext()
+// export const UserContext = React.createContext()
 
 function App() {
   let currentUser = true  //for now
+  let otherValue = "test McTest"
 
   return (
-    <UserContext.Provider value={currentUser}>
+    // <UserContext.Provider value={{ currentUser: currentUser, otherValue: otherValue }}>
       <div className="App">
-
-        {/* <Query query={GET_POKEMON_QUERY} >
-        {({ data, loading, error }) => {
-          if (loading || !data) return <Loader />
-          if (error) return <Error />
-          // console.log(data.pokemon[0].name)
-
-          return <div>{JSON.stringify(data)}</div>
-        }}
-      </Query> */}
 
         <PokerMain />
 
         {/* <Login /> */}
         {/* <Test /> */}
       </div>
-    </UserContext.Provider>
+    // </UserContext.Provider>
 
   );
 }

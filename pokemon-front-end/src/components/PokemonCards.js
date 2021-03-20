@@ -8,8 +8,9 @@ import { Query, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
 
-function PokemonCards(data) {
-  let cards = data.data.cards
+function PokemonCards() {
+  // console.log("DATA!!", data)
+  // let cards = data.data.cards
   // const [cards, setCards] = useState([]);
   // const [card1, setCard1ID] = useState(null);
   // const [card2, setCard2ID] = useState(null);
@@ -22,28 +23,27 @@ function PokemonCards(data) {
   //   setCard1ID(data.cards[findIndex])
   // }, data);
 
-  const generateRandomNumbers = () => {
+  const generateRandomNumbers = (data) => {
     let arrayOfIds = []
     let randomCard = null
     let findIndex = null
 
     // let randomCard = null
 
-    console.log("cards", cards)
+    // console.log("cards", cards)
     // console.log("Length", cards.length)
 
-    randomCard = Math.floor(Math.random() * (cards.length))
-    console.log("randomCard", randomCard)
+    // randomCard = Math.floor(Math.random() * (cards.length))
+    // console.log("randomCard", randomCard)
 
-    card1 = cards[randomCard]
-    console.log("card1", card1)
+    // card1 = cards[randomCard]
+    // console.log("card1", card1)
 
 
     // for (let i = 0; i < 100; i++) {
     //   randomCard = Math.floor(Math.random() * (cards.length))
     //   console.log("randomCard", randomCard)
     // }
-
 
 
 

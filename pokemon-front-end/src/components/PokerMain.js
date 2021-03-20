@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import '../App.css';
 
 import PokemonCards from './PokemonCards.js'
@@ -12,45 +12,35 @@ import Error from './Shared/Error.js'
 import { Query, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
-let randomCards = (dealHand) => {
-  console.log("dealt")
-  dealHand(1)
-}
+// import { UserContext, ME_QUERY } from '../../Root';
+// import { UserContext } from '../App.js'
+
 
 function PokerMain() {
+  // const { currentUser } = useContext(UserContext);
+  // console.log("currentUser", currentUser)
+  // const { otherValue } = useContext(UserContext);
+  // console.log("otherValue", otherValue)
+
+  // let randomCards = (dealHand) => {
+  //   console.log("dealt")
+  //   dealHand(1)
+  // }
+
   return (
     <div className="pokerMain">
-      <Query query={GET_ACTIVE_CARDS_QUERY} >
+      <Query query={GET_CARDS_QUERY} >
         {({ data, loading, error }) => {
           if (loading || !data) return <Loader />
           if (error) return <Error />
           // generateRandomNumbers(data)
 
           return <div>
-            <Mutation
-              mutation={DEAL_MUTATION}
-              variables={{ card1Id: 1}}
-              onCompleted={data => { 
-                randomCards()
-                console.log("it worked!!!!") 
-              }}
-            // update={handleUpdateCache}
-            // refetchQueries={() => [{ query: GET_TRACKS_QUERY }]}  //could also use graphQL subscriptions
-            >
-              {(dealHand, { loading, error }) => {
-                if (error) return <Error error={error} />
-                return (
-                  <div>
-                    <Counter />
-                    <PokemonCards data={data} />
-                    <Deal onClick={() => randomCards(dealHand)} />
-                    <Reset />
-                  </div>
-                )
-              }}
-            </Mutation>
+            <Counter />
+            <PokemonCards />
+            <Deal data={data} />
+            <Reset />
           </div>
-
         }}
       </Query>
     </div>
@@ -58,7 +48,7 @@ function PokerMain() {
 }
 
 
-const GET_ACTIVE_CARDS_QUERY = gql`
+const GET_CARDS_QUERY = gql`
  {
   cards {
     id
@@ -69,20 +59,6 @@ const GET_ACTIVE_CARDS_QUERY = gql`
     used
   }
  }
-`
-
-const DEAL_MUTATION = gql`
-  mutation($card1Id: Int!) {
-    dealHand(card1Id: $card1Id) {
-      card1 {
-        name
-        suit
-        color
-        active 
-        used
-      }
-    }
-  }
 `
 
 
