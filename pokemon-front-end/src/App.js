@@ -16,40 +16,31 @@ import { gql } from 'apollo-boost';
 // export const UserContext = React.createContext()
 
 function App() {
-  let currentUser = true  //for now
-  let otherValue = "test McTest"
+  // let currentUser = true  //for now
+  // let otherValue = "test McTest"
+
 
   return (
-    // <UserContext.Provider value={{ currentUser: currentUser, otherValue: otherValue }}>
-      <div className="App">
+    <div className="App">
 
-        <PokerMain />
+      <PokerMain />
 
-        {/* <Login /> */}
-        {/* <Test /> */}
-      </div>
+      {/* <Login /> */}
+      {/* <Test /> */}
+    </div>
     // </UserContext.Provider>
 
-  );
+  )
 }
 
-// const UPDATE_TRACK_MUTATION = gql`
-//   mutation($trackId: Int!, $title: String, $url: String, $description: String) {
-//     updateTrack(
-//       trackId: $trackId
-//       title: $title
-//       url: $url
-//       description: $description
-//     ) {
-//       track {
-//         id
-//         title
-//         description
-//         url
-//       }
-//     }
-//   }
-// `
+export const ME_QUERY = gql`
+    {
+        me {
+            id 
+            username
+        }
+    }
+`
 
 
 export default App;

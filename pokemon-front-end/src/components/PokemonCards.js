@@ -18,6 +18,10 @@ function PokemonCards() {
   // const [card4, setCard4ID] = useState(null);
   // const [card5, setCard5ID] = useState(null);
   let card1 = null
+  let card2 = null
+  let card3 = null
+  let card4 = null
+  let card5 = null
 
   // useEffect(() => {
   //   setCard1ID(data.cards[findIndex])
@@ -45,8 +49,6 @@ function PokemonCards() {
     //   console.log("randomCard", randomCard)
     // }
 
-
-
     // cards.map(card => {
     //   arrayOfIds.push(parseInt(card.id))
     // })
@@ -71,7 +73,6 @@ function PokemonCards() {
 
     console.log("----------------------------")
 
-
     // if (arrayOfIds.length > 2) {
     //   let tempIndex = null
     //   for (let i = 0; i <= 4; i++) {
@@ -94,7 +95,6 @@ function PokemonCards() {
 
   // }, [cards]);
 
-
   return (
     <div className="cards-grid" >
             {/* <div className="card"> {data.cards[0].name} </div>
@@ -105,8 +105,6 @@ function PokemonCards() {
     </div >
   );
 }
-
-
 
 
 export default PokemonCards

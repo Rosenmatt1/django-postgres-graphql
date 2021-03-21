@@ -4,12 +4,8 @@ import '../App.css';
 import PokemonCards from './PokemonCards.js'
 import Counter from './Counter.js'
 import Reset from './Reset.js'
-
 import Loader from './Shared/Loader.js'
 import Error from './Shared/Error.js'
-
-// import Register from './components/Auth/Register.js'
-// import Login from './components/Auth/Login.js'
 
 import { Query, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
@@ -17,12 +13,7 @@ import { gql } from 'apollo-boost';
 function Deal(data) {
   console.log("DATA!!", data)
   let cards = data.data.cards
-  // const [count, setCount] = useState(52);
 
-  // Similar to componentDidMount and componentDidUpdate:
-  //   useEffect(() => {
-
-  //   });
   return (
     <div className="deal">
       <Mutation

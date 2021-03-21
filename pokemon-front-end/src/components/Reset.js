@@ -8,7 +8,6 @@ import { Query, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
 function Reset() {
-
   return (
     <Mutation
       mutation={RESET_MUTATION}

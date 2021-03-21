@@ -70,13 +70,38 @@ class ResetDeck(graphene.Mutation):
         return ResetDeck()
 
 
+# If I add user functonality.  Each user will have there own deck!  Similar to the Like in the Tracks app
+# class CreateLike(graphene.Mutation):
+#     user = graphene.Field(UserType)
+#     pokemon = graphene.Field(PokemonType)
+
+#     class Arguments:
+#         pokemon_id = graphene.Int(required=True)
+
+#     def mutate(self, info, pokemon_id):
+#         user = info.context.user
+#         pokemon = Pokemon.objects.get(id=pokemon_id)
+
+#         if user.is_anonymous:
+#             raise GraphQLError('Log in to like a pokemon')
+    
+#         if not pokemon:
+#             raise GraphQLError('Cannot not find pokemon with given pokemon id')
+
+#         LikedPokemon.objects.create(
+#         user=user,
+#         pokemon=pokemon
+#         )
+
+#         return CreateLike(user=user, pokemon=pokemon)
+
 
 class Mutation(graphene.ObjectType):
     create_card = CreateCard.Field()
     deal_hand = DealHand.Field()
     reset_deck = ResetDeck.Field()
     
-
+    
     #       # Create Pokemon
     # DealHand.objects.create(
     #     user=user,
@@ -89,156 +114,8 @@ class Mutation(graphene.ObjectType):
     #     return CreatePokemon(pokemon=pokemon)
 
 
-# this will loop through all cards and change all active and used attributes to false
-# class ResetDeck(graphene.Mutation):
-#     card = graphene.Field(CardType)
-
-#     class Arguments:
-#         active = graphene.Boolean()
-#         used = graphene.String()
-
-#     def mutate(self, info, active, used):
-#         card.active = False
-#         card.used = False
-#         card.save()
-#         return CreateCard(card=card)
 
 
 
 
 
-# class MakeDeck(graphene.Mutation):
-#     card = graphene.Field(Card)
-
-#     class Arguments:
-#         name = graphene.String()
-#         suit = graphene.String()
-#         color = graphene.String()
-
-#     def mutate(self, info, name, suit, color):
-#         # user = info.context.user
-#         # if user.is_anonymous:
-#         #     raise GraphQLError('Please Log in')
-#         all_cards = {
-#             "AH": {
-#                 "name": "Ace",
-#                 "suit": "Hearts",
-#                 "color": "red"
-#             },
-#             "QH": {
-#                 "name": "Queen",
-#                 "suit": "Hearts",
-#                 "color": "red"
-
-#             },
-#              "JH": {
-#                 "name": "Jack",
-#                 "suit": "Hearts",
-#                 "color": "red"
-#             },
-#             "10H": {
-#                 "name": "10",
-#                 "suit": "Hearts",
-#                 "color": "red"
-#             },
-#             "9H": {
-#                 "name": "9",
-#                 "suit": "Hearts",
-#                 "color": "red"
-#             },
-#             "8H": {
-#                 "name": "8",
-#                 "suit": "Hearts",
-#                 "color": "red"
-#             },
-#             "7H": {
-#                 "name": "7",
-#                 "suit": "Hearts",
-#                 "color": "red"
-#             },
-#             "6H": {
-#                 "name": "6",
-#                 "suit": "Hearts",
-#                 "color": "red"
-#             },
-#             "5H": {
-#                 "name": "5",
-#                 "suit": "Hearts",
-#                 "color": "red"
-#             },
-#             "4H": {
-#                 "name": "4",
-#                 "suit": "Hearts",
-#                 "color": "red"
-#             },
-#             "3H": {
-#                 "name": "3",
-#                 "suit": "Hearts",
-#                 "color": "red"
-#             },
-#             "2H": {
-#                 "name": "2",
-#                 "suit": "Hearts",
-#                 "color": "red"
-#             }
-#         }
-#         # for attr, value in k.__dict__.items():
-#         for attr, value in all_cards.items():
-#             print(value['name'])
-#             card = Card(name=value['name'], suit=value['suit'], color=value['color'])
-#             card.save()
-#             return MakeDeck(card=card)
-            
-
-    # ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth"]
-
-        # Pokemon.objects.create(
-        # all_pokemon=all_pokemon
-        # )
-
-    #     class Query(ObjectType):
-    # some_func = Field(SomeObjectType, args={'value': graphene.List(graphene.String)})
-
-# class ArticleType(DjangoObjectType):
-#     tag_list = graphene.List(graphene.String)
-
-#     class Meta:
-#          model = Article
-
-#     def resolve_tag_list(self, info):
-#          return [tag.tag for tag in self.tags.all()]
-
-# ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth"]
-# Deal removes 5 random strings from array
-# Card counter - How many cards left
-# Reset - Resets back to orinal array
-
-    # class ArticleType(DjangoObjectType):
-    # tag_list = graphene.List(graphene.String)
-
-    # class Meta:
-    #      model = Article
-
-    # def resolve_tag_list(self, info):
-    #      return [tag.tag for tag in self.tags.all()]
-
-# class UpdateBattle(graphene.Mutation):
-#     pokemon = graphene.Field(BattleType)
-#     # pokemon_list = graphene.List(graphene.String)
-
-#     class Arguments:
-#         # track_id = graphene.Int(required=True)
-#         pokemon_list = graphene.List(graphene.String)
-      
-
-#     def mutate(self, info, pokemon_list):
-#         # user = info.context.user
-#         pokemon = Pokemon.objects.get()
-
-#         # if track.posted_by != user:
-#         #     raise Exception('Not permitted to update this track')
-
-#         for poke in pokemon_list
-#             pokemon = poke.name
-#             pokemon.save()
-#         return UpdateBattle(pokemon=pokemon)
