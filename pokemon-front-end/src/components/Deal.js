@@ -29,7 +29,7 @@ function Deal(data) {
         {(dealHand, { loading, error }) => {
           if (error) return <Error error={error} />
           return (
-            <div>
+            <div onClick={()=> dealHand()}>
               Deal
             </div>
           )

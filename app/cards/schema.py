@@ -59,7 +59,7 @@ class DealHand(graphene.Mutation):
         card1.active = True
         card1.used = True
         card1.save()
-        return Dealhand(card1=card1)
+        return DealHand(card1=card1)
 
 
 class ResetDeck(graphene.Mutation):
@@ -101,7 +101,7 @@ class Mutation(graphene.ObjectType):
     deal_hand = DealHand.Field()
     reset_deck = ResetDeck.Field()
     
-    
+
     #       # Create Pokemon
     # DealHand.objects.create(
     #     user=user,
