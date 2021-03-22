@@ -3,7 +3,7 @@ import '../App.css';
 
 import PokemonCards from './PokemonCards.js'
 import Counter from './Counter.js'
-import Reset from './Reset.js'
+
 import Loader from './Shared/Loader.js'
 import Error from './Shared/Error.js'
 
@@ -12,6 +12,8 @@ import { gql } from 'apollo-boost';
 
 function Deal(data) {
   let cards = data.data.cards
+  let card = null
+  let activeCards = []
   let randomIndex = null
   let card1 = null
   let card2 = null
@@ -20,41 +22,53 @@ function Deal(data) {
   let card5 = null
 
 
-  const generateRandomCards = (dealHand) => {
+  const generateRandomCards = async (dealHand) => {
     console.log("cards", cards)
 
-    randomIndex = Math.floor(Math.random() * (cards.length))
-    // console.log("randomCard", randomIndex)
-    card1 = cards[randomIndex]
-    cards.splice(randomIndex, 1)
-    // console.log("cards after splice", cards)
+    if (cards.length > 2) {
+    // randomIndex = Math.floor(Math.random() * (cards.length))
+    // card1 = cards[randomIndex]
+    // cards.splice(randomIndex, 1)
 
-    randomIndex = Math.floor(Math.random() * (cards.length))
-    // console.log("randomCard", randomIndex)
-    card2 = cards[randomIndex]
-    cards.splice(randomIndex, 1)
-    // console.log("cards after splice", cards)
+    // randomIndex = Math.floor(Math.random() * (cards.length))
+    // card2 = cards[randomIndex]
+    // cards.splice(randomIndex, 1)
 
-    randomIndex = Math.floor(Math.random() * (cards.length))
-    // console.log("randomCard", randomIndex)
-    card3 = cards[randomIndex]
-    cards.splice(randomIndex, 1)
-    // console.log("cards after splice", cards)
+    // randomIndex = Math.floor(Math.random() * (cards.length))
+    // card3 = cards[randomIndex]
+    // cards.splice(randomIndex, 1)
 
-    randomIndex = Math.floor(Math.random() * (cards.length))
-    // console.log("randomCard", randomIndex)
-    card4 = cards[randomIndex]
-    cards.splice(randomIndex, 1)
-    // console.log("cards after splice", cards)
+    // randomIndex = Math.floor(Math.random() * (cards.length))
+    // card4 = cards[randomIndex]
+    // cards.splice(randomIndex, 1)
 
-    randomIndex = Math.floor(Math.random() * (cards.length))
-    // console.log("randomCard", randomIndex)
-    card5 = cards[randomIndex]
-    cards.splice(randomIndex, 1)
-    // console.log("cards after splice", cards)
+    // randomIndex = Math.floor(Math.random() * (cards.length))
+    // card5 = cards[randomIndex]
+    // cards.splice(randomIndex, 1)
 
-    dealHand({ variables: { card1Id: parseInt(card1.id), card2Id: parseInt(card2.id), card3Id: parseInt(card3.id), card4Id: parseInt(card4.id), card5Id: parseInt(card5.id) } })
+    for (let i = 0; i <=4; i++) {
+      randomIndex = Math.floor(Math.random() * (cards.length))
+      card = cards[randomIndex]
+      activeCards.push(card)
+      cards.splice(randomIndex, 1)
+        // console.log("cards after last splice", cards)
+    // console.log("cards LENGTH after last splice", cards.length)
+    }
+    // console.log("cards after last splice", cards)
+    // console.log("cards LENGTH after last splice", cards.length)
+    await dealHand({ variables: { card1Id: parseInt(activeCards[0].id), card2Id: parseInt(activeCards[1].id), card3Id: parseInt(activeCards[2].id), card4Id: parseInt(activeCards[3].id), card5Id: parseInt(activeCards[4].id) } })
+    activeCards = []
+    } else {
+      console.log("Game Over")
+      if (cards[0].name === "Ace" || cards[1].name === "Ace") {
+        console.log("You Win")
+      } else {
+        console.log("You Lose Sucker")
+      }
+    }
   }
+
+  // dealHand({ variables: { card1Id: parseInt(activeCards[0].id), card2Id: parseInt(activeCards[1].id), card3Id: parseInt(activeCards[2].id), card4Id: parseInt(activeCards[3].id), card5Id: parseInt(activeCards[4].id) } })
 
   return (
     <div className="deal">
@@ -71,6 +85,7 @@ function Deal(data) {
           return (
             <div onClick={() => generateRandomCards(dealHand)}>
               Deal
+              <PokemonCards cards={activeCards}/>
             </div>
           )
         }}

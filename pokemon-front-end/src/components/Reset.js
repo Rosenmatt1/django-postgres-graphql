@@ -12,7 +12,7 @@ function Reset() {
     <Mutation
       mutation={RESET_MUTATION}
       onCompleted={data => {
-        console.log("it worked!!!!")
+        console.log("Reset Mutation worked!!!")
       }}
     // update={handleUpdateCache}
     // refetchQueries={() => [{ query: GET_TRACKS_QUERY }]}  //could also use graphQL subscriptions
