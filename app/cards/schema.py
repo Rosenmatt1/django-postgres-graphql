@@ -50,16 +50,45 @@ class CreateCard(graphene.Mutation):
 
 class DealHand(graphene.Mutation):
     card1 = graphene.Field(CardType)
+    card2 = graphene.Field(CardType)
+    card3 = graphene.Field(CardType)
+    card4 = graphene.Field(CardType)
+    card5 = graphene.Field(CardType)
 
     class Arguments:
         card1_id = graphene.Int(required=True)
+        card2_id = graphene.Int(required=True)
+        card3_id = graphene.Int(required=True)
+        card4_id = graphene.Int(required=True)
+        card5_id = graphene.Int(required=True)
 
-    def mutate(self, info, card1_id):
+    def mutate(self, info, card1_id, card2_id, card3_id, card4_id, card5_id):
         card1 = Card.objects.get(id=card1_id)
         card1.active = True
         card1.used = True
         card1.save()
-        return DealHand(card1=card1)
+
+        card2 = Card.objects.get(id=card2_id)
+        card2.active = True
+        card2.used = True
+        card2.save()
+
+        card3 = Card.objects.get(id=card3_id)
+        card3.active = True
+        card3.used = True
+        card3.save()
+
+        card4 = Card.objects.get(id=card4_id)
+        card4.active = True
+        card4.used = True
+        card4.save()
+
+        card5 = Card.objects.get(id=card5_id)
+        card5.active = True
+        card5.used = True
+        card5.save()
+
+        return DealHand(card1=card1, card2=card2, card3=card3, card4=card4, card5=card5)
 
 
 class ResetDeck(graphene.Mutation):
