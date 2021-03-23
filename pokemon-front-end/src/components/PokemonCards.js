@@ -8,7 +8,7 @@ import { gql } from 'apollo-boost';
 
 
 function PokemonCards(data) {
-  console.log("CARS FROM DEAL", data.cards)
+  console.log("CARDS FROM DEAL", data.cards)
   let cards = data.cards || null
   // const [cards, setCards] = useState([]);
   // const [card1, setCard1ID] = useState(null);

@@ -5,7 +5,6 @@ import PokemonCards from './PokemonCards.js'
 import Counter from './Counter.js'
 import Reset from './Reset.js'
 import Deal from './Deal.js'
-
 import Loader from './Shared/Loader.js'
 import Error from './Shared/Error.js'
 
@@ -22,22 +21,15 @@ function PokerMain() {
   // const { otherValue } = useContext(UserContext);
   // console.log("otherValue", otherValue)
 
-  // let randomCards = (dealHand) => {
-  //   console.log("dealt")
-  //   dealHand(1)
-  // }
-
   return (
     <div className="pokerMain">
       <Query query={GET_CARDS_QUERY} >
         {({ data, loading, error }) => {
           if (loading || !data) return <Loader />
           if (error) return <Error />
-          // generateRandomNumbers(data)
 
           return <div>
             <Counter />
-            <PokemonCards />
             <Deal data={data} />
             <Reset />
           </div>

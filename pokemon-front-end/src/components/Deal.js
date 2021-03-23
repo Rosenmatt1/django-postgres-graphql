@@ -24,40 +24,39 @@ function Deal(data) {
 
   const generateRandomCards = async (dealHand) => {
     console.log("cards", cards)
-
     if (cards.length > 2) {
-    // randomIndex = Math.floor(Math.random() * (cards.length))
-    // card1 = cards[randomIndex]
-    // cards.splice(randomIndex, 1)
+      // randomIndex = Math.floor(Math.random() * (cards.length))
+      // card1 = cards[randomIndex]
+      // cards.splice(randomIndex, 1)
 
-    // randomIndex = Math.floor(Math.random() * (cards.length))
-    // card2 = cards[randomIndex]
-    // cards.splice(randomIndex, 1)
+      // randomIndex = Math.floor(Math.random() * (cards.length))
+      // card2 = cards[randomIndex]
+      // cards.splice(randomIndex, 1)
 
-    // randomIndex = Math.floor(Math.random() * (cards.length))
-    // card3 = cards[randomIndex]
-    // cards.splice(randomIndex, 1)
+      // randomIndex = Math.floor(Math.random() * (cards.length))
+      // card3 = cards[randomIndex]
+      // cards.splice(randomIndex, 1)
 
-    // randomIndex = Math.floor(Math.random() * (cards.length))
-    // card4 = cards[randomIndex]
-    // cards.splice(randomIndex, 1)
+      // randomIndex = Math.floor(Math.random() * (cards.length))
+      // card4 = cards[randomIndex]
+      // cards.splice(randomIndex, 1)
 
-    // randomIndex = Math.floor(Math.random() * (cards.length))
-    // card5 = cards[randomIndex]
-    // cards.splice(randomIndex, 1)
+      // randomIndex = Math.floor(Math.random() * (cards.length))
+      // card5 = cards[randomIndex]
+      // cards.splice(randomIndex, 1)
 
-    for (let i = 0; i <=4; i++) {
-      randomIndex = Math.floor(Math.random() * (cards.length))
-      card = cards[randomIndex]
-      activeCards.push(card)
-      cards.splice(randomIndex, 1)
+      for (let i = 0; i <= 4; i++) {
+        randomIndex = Math.floor(Math.random() * (cards.length))
+        card = cards[randomIndex]
+        activeCards.push(card)
+        cards.splice(randomIndex, 1)
         // console.log("cards after last splice", cards)
-    // console.log("cards LENGTH after last splice", cards.length)
-    }
-    // console.log("cards after last splice", cards)
-    // console.log("cards LENGTH after last splice", cards.length)
-    await dealHand({ variables: { card1Id: parseInt(activeCards[0].id), card2Id: parseInt(activeCards[1].id), card3Id: parseInt(activeCards[2].id), card4Id: parseInt(activeCards[3].id), card5Id: parseInt(activeCards[4].id) } })
-    activeCards = []
+        // console.log("cards LENGTH after last splice", cards.length)
+      }
+      // console.log("cards after last splice", cards)
+      // console.log("cards LENGTH after last splice", cards.length)
+      await dealHand({ variables: { card1Id: parseInt(activeCards[0].id), card2Id: parseInt(activeCards[1].id), card3Id: parseInt(activeCards[2].id), card4Id: parseInt(activeCards[3].id), card5Id: parseInt(activeCards[4].id) } })
+      activeCards = []
     } else {
       console.log("Game Over")
       if (cards[0].name === "Ace" || cards[1].name === "Ace") {
@@ -83,9 +82,11 @@ function Deal(data) {
         {(dealHand, { loading, error }) => {
           if (error) return <Error error={error} />
           return (
-            <div onClick={() => generateRandomCards(dealHand)}>
-              Deal
-              <PokemonCards cards={activeCards}/>
+            <div>
+              <div className="deal" onClick={() => generateRandomCards(dealHand)}> Deal </div>
+
+              <PokemonCards cards={activeCards} />
+
             </div>
           )
         }}

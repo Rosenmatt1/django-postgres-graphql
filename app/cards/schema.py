@@ -18,20 +18,14 @@ class CardType(DjangoObjectType):
 
 class Query(graphene.ObjectType):
     cards = graphene.List(CardType)
-    used = graphene.List(CardType)
+    # used = graphene.List(CardType)
 
     def resolve_cards(self, info):
-        # print(data.all_cards)
-        return Card.objects.all()
+        return Card.objects.filter(used=False)
 
-    def resolve_used(self, info):
-        # print(data.all_cards)
-        return Card.objects.filter(used=True)
-    
-    # def resolve_deal(self, info):
+    # def resolve_used(self, info):
     #     # print(data.all_cards)
-    #     return Card.objects.all()
-    # *****The Query can be a filter***
+    #     return Card.objects.filter(used=False)
 
 
 class CreateCard(graphene.Mutation):
