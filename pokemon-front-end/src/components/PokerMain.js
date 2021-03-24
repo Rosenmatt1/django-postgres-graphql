@@ -15,6 +15,8 @@ import { gql } from 'apollo-boost';
 // import { UserContext } from '../App.js'
 
 
+//hitting reset is updating the backend but not the front end. **********************************************
+
 function PokerMain() {
   // const { currentUser } = useContext(UserContext);
   // console.log("currentUser", currentUser)
