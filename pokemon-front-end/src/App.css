@@ -1,52 +1,68 @@
 .App {
-  text-align: center;
+  background-color: green;
+  width: 100vw;
+  height: 100vh;
 }
 
-.counterContainer {
+/* .counterContainer {
   width: 100vw;
   display: flex;
   justify-content: center;
-}
+} */
 
 .counter {
   height: 100px;
   width: 200px;
   margin-top: 20px;
-  background-color: green;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
   z-index: 2;
 }
 
-.cards-grid {
-  display: flex;
-  justify-content: center;
-}
 
-.card {
-  height: 350px;
-  width: 250px;
-  margin: 20px;
-  background-color: pink;
-}
-
-.resetContainer {
+/* .resetContainer {
   width: 100vw;
   display: flex;
   justify-content: flex-end
-}
+} */
 
 .reset {
-  height: 100px;
+  height: 70px;
   width: 200px;
   margin-right: 20px;
-  background-color: red;
+  background-color: transparent;
+  color: yellow;
+  border: 1px solid yellow;
+  border-radius: 10px;
 }
+
 
 .deal {
   height: 100px;
   width: 200px;
   margin-right: 20px;
-  background-color: blue;
+  background-color: yellow;
+  color: black;
+  border-radius: 10px;
 }
+
+
+/* .cards-grid {
+  display: flex;
+  justify-content: center;
+} */
+
+.card {
+  width: 5em;
+  height: 7em;
+  background-color: #ffffff;
+  box-shadow: 0 0.0625em 0.125em rgba(0, 0, 0, 0.15);
+  border-radius: 0.25em;
+  display: inline-block;
+  position: relative;
+}
+
 
 
 

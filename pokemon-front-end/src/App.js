@@ -11,25 +11,20 @@ import { Query, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
 // import { UserContext } from '../../Root';
 
-//Use Tailwind for styling!!!!!!
-
 // export const UserContext = React.createContext()
+
 
 function App() {
   // let currentUser = true  //for now
   // let otherValue = "test McTest"
 
-
   return (
     <div className="App">
-
       <PokerMain />
-
       {/* <Login /> */}
       {/* <Test /> */}
     </div>
     // </UserContext.Provider>
-
   )
 }
 
