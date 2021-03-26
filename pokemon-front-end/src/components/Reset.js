@@ -6,6 +6,7 @@ import Error from './Shared/Error.js'
 
 import { Query, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
+import { GET_CARDS_QUERY } from './PokerMain.js';
 
 function Reset() {
   return (
@@ -15,7 +16,7 @@ function Reset() {
         console.log("Reset Mutation worked!!!")
       }}
     // update={handleUpdateCache}
-    // refetchQueries={() => [{ query: GET_TRACKS_QUERY }]}  //could also use graphQL subscriptions
+    refetchQueries={() => [{ query: GET_CARDS_QUERY }]} //could also use graphQL subscriptions
     >
       {(resetDeck, { loading, error }) => {
         if (error) return <Error error={error} />

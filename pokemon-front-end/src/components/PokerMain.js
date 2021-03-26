@@ -14,15 +14,11 @@ import { gql } from 'apollo-boost';
 // import { UserContext, ME_QUERY } from '../../Root';
 // import { UserContext } from '../App.js'
 
-
-//hitting reset is updating the backend but not the front end. **********************************************
-
 function PokerMain() {
   // const { currentUser } = useContext(UserContext);
   // console.log("currentUser", currentUser)
   // const { otherValue } = useContext(UserContext);
   // console.log("otherValue", otherValue)
-
   return (
     <div className="pokerMain">
       <Query query={GET_CARDS_QUERY} >
@@ -31,7 +27,6 @@ function PokerMain() {
           if (error) return <Error />
 
           return <div>
-            <Counter />
             <Deal data={data} />
             <Reset />
           </div>
@@ -42,7 +37,7 @@ function PokerMain() {
 }
 
 
-const GET_CARDS_QUERY = gql`
+export const GET_CARDS_QUERY = gql`
  {
   cards {
     id
@@ -54,6 +49,5 @@ const GET_CARDS_QUERY = gql`
   }
  }
 `
-
 
 export default PokerMain;

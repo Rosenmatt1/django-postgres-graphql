@@ -10,6 +10,8 @@ import Error from './Shared/Error.js'
 import { Query, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
+import { GET_CARDS_QUERY } from './PokerMain.js';
+
 function Deal(data) {
   let cards = data.data.cards
   let card = null
@@ -77,16 +79,15 @@ function Deal(data) {
           console.log("Deal Mutation worked!!!!")
         }}
       // update={handleUpdateCache}
-      // refetchQueries={() => [{ query: GET_TRACKS_QUERY }]}  //could also use graphQL subscriptions
+      refetchQueries={() => [{ query: GET_CARDS_QUERY }]}  //could also use graphQL subscriptions
       >
         {(dealHand, { loading, error }) => {
           if (error) return <Error error={error} />
           return (
             <div>
               <div className="deal" onClick={() => generateRandomCards(dealHand)}> Deal </div>
-
+              <Counter data={data}/>
               <PokemonCards cards={activeCards} />
-
             </div>
           )
         }}

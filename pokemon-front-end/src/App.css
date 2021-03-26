@@ -13,6 +13,7 @@
   width: 200px;
   margin-top: 20px;
   background-color: green;
+  z-index: 2;
 }
 
 .cards-grid {
