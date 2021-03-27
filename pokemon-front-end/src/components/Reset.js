@@ -22,9 +22,7 @@ function Reset() {
         if (error) return <Error error={error} />
         return (
           <div className="resetContainer" onClick={() => resetDeck()}>
-            <div className="reset">
-              Reset
-            </div>
+            <div className="reset"> Reset </div>
           </div>
         )
       }}

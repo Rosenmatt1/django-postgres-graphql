@@ -1,5 +1,7 @@
 .App {
-  background-color: green;
+  /* background-color: green; */
+  background-color: #00b712;
+  background-image: linear-gradient(315deg, #00b712 0%, #5aff15 74%);
   width: 100vw;
   height: 100vh;
 }
@@ -20,21 +22,23 @@
   z-index: 2;
 }
 
-
-/* .resetContainer {
-  width: 100vw;
-  display: flex;
-  justify-content: flex-end
-} */
-
-.reset {
+.resetContainer {
   height: 70px;
   width: 200px;
-  margin-right: 20px;
-  background-color: transparent;
+  position:absolute;
+  bottom:20px;
+  right: 20px;
   color: yellow;
   border: 1px solid yellow;
   border-radius: 10px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reset {
+  /* text-align: center; */
 }
 
 
@@ -48,10 +52,10 @@
 }
 
 
-/* .cards-grid {
+.cards-grid {
   display: flex;
-  justify-content: center;
-} */
+  justify-content: space-between;
+}
 
 .card {
   width: 5em;
