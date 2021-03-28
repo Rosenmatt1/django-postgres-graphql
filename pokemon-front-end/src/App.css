@@ -1,31 +1,36 @@
 .App {
-  /* background-color: green; */
-  background-color: #00b712;
-  background-image: linear-gradient(315deg, #00b712 0%, #5aff15 74%);
+  background-color: green;
+  background-image: linear-gradient(315deg, #00b712 0%, green 74%);
   width: 100vw;
   height: 100vh;
+  position: relative;
 }
 
-/* .counterContainer {
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-} */
-
-.counter {
+.counterContainer {
   height: 100px;
   width: 200px;
+  position:absolute;
+  top: 10vh;
+  right: 50vw;
   margin-top: 20px;
   background-color: black;
   color: white;
-  border-radius: 10px;
-  z-index: 2;
+  border: yellow solid 2px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.counter {
+  display: block;
+  text-align: center;
 }
 
 .resetContainer {
   height: 70px;
   width: 200px;
-  position:absolute;
+  position: absolute;
   bottom:20px;
   right: 20px;
   color: yellow;
@@ -41,32 +46,66 @@
   /* text-align: center; */
 }
 
-
-.deal {
-  height: 100px;
+.playAgainContainer {
+  height: 70px;
   width: 200px;
-  margin-right: 20px;
-  background-color: yellow;
-  color: black;
+  position: absolute;
+  bottom:20px;
+  right: 20px;
+  color: yellow;
+  border: 1px solid yellow;
   border-radius: 10px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.playAgain {
+  /* text-align: center; */
+}
+
+
+.dealContainer {
+  height: 100px;
+  width: 200px;
+  position:absolute;
+  bottom:20vh;
+  right: 50vw;
+  margin-right: 20px;
+  background-color: yellow;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deal {
+  color: black;
+}
 
 .cards-grid {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+
 }
 
 .card {
-  width: 5em;
-  height: 7em;
-  background-color: #ffffff;
+  width: 225px;
+  height: 325px;
+  background: white;
   box-shadow: 0 0.0625em 0.125em rgba(0, 0, 0, 0.15);
   border-radius: 0.25em;
-  display: inline-block;
-  position: relative;
 }
 
+.Black {
+  color: black;
+}
+
+.Red {
+  color: red;
+}
 
 
 

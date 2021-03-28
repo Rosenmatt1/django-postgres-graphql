@@ -72,27 +72,25 @@ function Deal(data) {
   // dealHand({ variables: { card1Id: parseInt(activeCards[0].id), card2Id: parseInt(activeCards[1].id), card3Id: parseInt(activeCards[2].id), card4Id: parseInt(activeCards[3].id), card5Id: parseInt(activeCards[4].id) } })
 
   return (
-    <div className="deal">
-      <Mutation
-        mutation={DEAL_MUTATION}
-        onCompleted={data => {
-          console.log("Deal Mutation worked!!!!")
-        }}
+    <Mutation
+      mutation={DEAL_MUTATION}
+      onCompleted={data => {
+        console.log("Deal Mutation worked!!!!")
+      }}
       // update={handleUpdateCache}
       refetchQueries={() => [{ query: GET_CARDS_QUERY }]}  //could also use graphQL subscriptions
-      >
-        {(dealHand, { loading, error }) => {
-          if (error) return <Error error={error} />
-          return (
-            <div>
-              <div className="deal" onClick={() => generateRandomCards(dealHand)}> Deal </div>
-              <Counter data={data}/>
-              <PokemonCards cards={activeCards} />
-            </div>
-          )
-        }}
-      </Mutation>
-    </div>
+    >
+      {(dealHand, { loading, error }) => {
+        if (error) return <Error error={error} />
+        return (
+          <div>
+            <div className="dealContainer" onClick={() => generateRandomCards(dealHand)}> <div className="deal"> Deal </div> </div>
+            <Counter data={data} />
+            <PokemonCards cards={activeCards} />
+          </div>
+        )
+      }}
+    </Mutation>
   );
 }
 
