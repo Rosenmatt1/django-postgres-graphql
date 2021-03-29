@@ -52,11 +52,11 @@ class DealHand(graphene.Mutation):
     class Arguments:
         card1_id = graphene.Int(required=True)
         card2_id = graphene.Int(required=True)
-        card3_id = graphene.Int(required=True)
-        card4_id = graphene.Int(required=True)
-        card5_id = graphene.Int(required=True)
+        card3_id = graphene.Int(required=False)
+        card4_id = graphene.Int(required=False)
+        card5_id = graphene.Int(required=False)
 
-    def mutate(self, info, card1_id, card2_id, card3_id, card4_id, card5_id):
+    def mutate(self, info, card1_id, card2_id, card3_id=None, card4_id=None, card5_id=None):
         card1 = Card.objects.get(id=card1_id)
         card1.active = True
         card1.used = True
@@ -67,22 +67,32 @@ class DealHand(graphene.Mutation):
         card2.used = True
         card2.save()
 
-        card3 = Card.objects.get(id=card3_id)
-        card3.active = True
-        card3.used = True
-        card3.save()
+        # print("card3!", card3)
+        print("card3_id", card3_id)
 
-        card4 = Card.objects.get(id=card4_id)
-        card4.active = True
-        card4.used = True
-        card4.save()
+        if card3_id:
+            card3 = Card.objects.get(id=card3_id)
+            card3.active = True
+            card3.used = True
+            card3.save()
 
-        card5 = Card.objects.get(id=card5_id)
-        card5.active = True
-        card5.used = True
-        card5.save()
+        if card4_id:
+            card4 = Card.objects.get(id=card4_id)
+            card4.active = True
+            card4.used = True
+            card4.save()
 
-        return DealHand(card1=card1, card2=card2, card3=card3, card4=card4, card5=card5)
+        if card5_id:
+            card5 = Card.objects.get(id=card5_id)
+            card5.active = True
+            card5.used = True
+            card5.save()
+
+        if card3_id and card4_id and card5_id:
+            return DealHand(card1=card1, card2=card2, card3=card3, card4=card4, card5=card5)
+        else: 
+            return DealHand(card1=card1, card2=card2)
+
 
 
 class ResetDeck(graphene.Mutation):

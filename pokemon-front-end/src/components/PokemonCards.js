@@ -5,14 +5,14 @@ import Error from './Shared/Error.js'
 
 
 function PokemonCards(data) {
-  // console.log("CARDS FROM DEAL", data.cards)
+  console.log("CARDS FROM DEAL", data.cards)
   let cards = data.cards || null
 
   return cards && (
     <div className="cards-grid" >
       {cards.map(card => (
-        <div>
-          <div className="card" key={card.id} >
+        <div key={card.id}>
+          <div className="card"  >
             <div className={`${card.color}`}> {card.name} </div>
             <div className={`${card.color}`}> {card.suit} </div>
           </div>

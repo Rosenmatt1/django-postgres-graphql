@@ -8,7 +8,8 @@ import { Query, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import { GET_CARDS_QUERY } from './PokerMain.js';
 
-function Reset() {
+
+function PlayAgain() {
   return (
     <Mutation
       mutation={PLAY_AGAIN_MUTATION}
@@ -45,4 +46,4 @@ const PLAY_AGAIN_MUTATION = gql`
 `
 
 
-export default Reset;
+export default PlayAgain;
