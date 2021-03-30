@@ -5,8 +5,8 @@ import Error from './Shared/Error.js'
 
 
 function PokemonCards(data) {
-  console.log("CARDS FROM DEAL", data.cards)
   let cards = data.cards || null
+  console.log("CARDS FROM DEAL", cards)
 
   return cards && (
     <div className="cards-grid" >
@@ -19,12 +19,6 @@ function PokemonCards(data) {
         </div>
       ))}
     </div >
-
-    // <div className="cards-grid" >
-    //   <div className="card" >
-    //     <div> Ace </div>
-    //   </div>
-    // </div >
   );
 }
 

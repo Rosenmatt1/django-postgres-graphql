@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import '../App.css';
 
-import PokemonCards from './PokemonCards.js'
-import Counter from './Counter.js'
 import Reset from './Reset.js'
 import Deal from './Deal.js'
 import Loader from './Shared/Loader.js'

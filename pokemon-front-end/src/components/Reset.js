@@ -8,6 +8,7 @@ import { Query, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import { GET_CARDS_QUERY } from './PokerMain.js';
 
+
 function Reset() {
   return (
     <Mutation
@@ -30,6 +31,7 @@ function Reset() {
   );
 }
 
+
 const RESET_MUTATION = gql`
   mutation {
     resetDeck {
@@ -43,6 +45,5 @@ const RESET_MUTATION = gql`
     }
   }
 `
-
 
 export default Reset;
