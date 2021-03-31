@@ -15,7 +15,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
 import Lock from "@material-ui/icons/Lock";
 
-function Login() {
+function Login({setNewUser}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,7 +26,6 @@ function Login() {
 
   return (
     <div className="">
-      
         <Mutation mutation={LOGIN_MUTATION} variables={{ username, password }}>
           {(tokenAuth, { loading, error, called, client }) => {
 
@@ -49,12 +48,12 @@ function Login() {
                   <InputLabel htmlFor="password"> Password </InputLabel>
                   <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
                 </FormControl >
-                {/* <Button type="submit" fullWidth variant="contained" color="primary" disabled={loading || !username.trim() || !password.trim()} className={classes.submit}>
+                <Button type="submit" fullWidth variant="contained" color="primary" disabled={loading || !username.trim() || !password.trim()} className="">
                   {loading ? "Loging In..." : "Log In"}
                 </Button>
                 <Button fullWidth color="secondary" variant="outlined" onClick={() => setNewUser(true)}>
                   New user? Register here
-              </Button> */}
+              </Button>
 
                 {/* Error Handling  */}
                 {error && <Error error={error} />}

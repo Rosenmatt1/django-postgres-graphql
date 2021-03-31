@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Auth from './components/Auth'
 import reportWebVitals from './reportWebVitals';
 
 import { ApolloProvider, Query, Mutation } from 'react-apollo';
@@ -39,7 +40,10 @@ const IS_LOGGED_IN_QUERY = gql`
 ReactDOM.render(
   <ApolloProvider client={client}>
     <React.StrictMode>
-      <App />
+    <Query query={IS_LOGGED_IN_QUERY}>
+            {({ data }) => data.isLoggedIn ? <App />: <Auth/> }
+        </Query>
+      
     </React.StrictMode>
   </ApolloProvider>,
   document.getElementById('root')
