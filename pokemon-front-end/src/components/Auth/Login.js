@@ -26,6 +26,7 @@ function Login({setNewUser}) {
 
   return (
     <div className="">
+      <Paper className="">
         <Mutation mutation={LOGIN_MUTATION} variables={{ username, password }}>
           {(tokenAuth, { loading, error, called, client }) => {
 
@@ -61,6 +62,8 @@ function Login({setNewUser}) {
             )
           }}
         </Mutation>
+        </Paper>
+        
     </div>
   )
 };
