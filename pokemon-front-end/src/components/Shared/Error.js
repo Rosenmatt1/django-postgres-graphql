@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../../App.css';
 
 
-function Error(error) {
+function Error({error}) {
   return (
         <div className="error">
             {error}

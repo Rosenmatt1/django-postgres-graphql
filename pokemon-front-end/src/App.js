@@ -20,13 +20,12 @@ export const UserContext = React.createContext()
 
 function App() {
   let currentUser = true  //for now
-  // let otherValue = "test McTest"
 
   return (
     <div className="App">
-
       <Query query={ME_QUERY} fetchPolicy='cache-and-network'>
         {({ data, loading, error }) => {
+          console.log(data)
           if (loading) return <Loader loading={loading} />
           if (error) return <Error error={error} />
           const currentUser = data.me
@@ -44,7 +43,6 @@ function App() {
           )
         }}
       </Query>
-
       {/* <Test /> */}
     </div>
 
@@ -59,8 +57,6 @@ export const ME_QUERY = gql`
         }
     }
 `
-
-
 
 
 export default App;

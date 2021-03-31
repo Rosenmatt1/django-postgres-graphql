@@ -27,7 +27,7 @@ import Gavel from "@material-ui/icons/Gavel";
 // import Button from "@material-ui/core/Button";
 
 
-function Register({setNewUser}) {
+function Register({ setNewUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -39,8 +39,8 @@ function Register({setNewUser}) {
   //   });
 
   function Transition(props) {
-  return <Slide direction="up" {...props} />
-}
+    return <Slide direction="up" {...props} />
+  }
 
   const handleSubmit = (e, createUser) => {
     e.preventDefault()
@@ -57,7 +57,13 @@ function Register({setNewUser}) {
 
   return (
     <div className="registerContainer">
-      <Mutation mutation={REGISTER_MUTATION} variables={{ username, password }} onCompleted={data => {
+      <Avatar className="">
+        <Gavel />
+      </Avatar>
+      <Typography variant="headline">
+        Register
+        </Typography>
+      <Mutation mutation={REGISTER_MUTATION} variables={{ username, password, email }} onCompleted={data => {
         console.log({ data })
         // setOpen(true)
       }}>
@@ -78,12 +84,14 @@ function Register({setNewUser}) {
                 <InputLabel htmlFor="password"> Password </InputLabel>
                 <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
               </FormControl >
+
               <Button type="submit" fullWidth variant="contained" color="secondary" disabled={loading || !username.trim() || !email.trim() || !password.trim()} >
                 {loading ? "Registering..." : "Register"}
               </Button>
+
               <Button fullWidth color="primary" variant="outlined" onClick={() => setNewUser(false)}>
                 Previous user? Log in here
-            </Button>
+              </Button>
 
               {/* Error Handling  */}
               {error && <Error error={error} />}
