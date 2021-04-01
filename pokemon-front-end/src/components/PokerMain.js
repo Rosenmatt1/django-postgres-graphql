@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import '../App.css';
-
 import Reset from './Reset.js'
 import Deal from './Deal.js'
 import Loader from './Shared/Loader.js'
@@ -18,7 +17,7 @@ function PokerMain() {
   // const { otherValue } = useContext(UserContext);
   // console.log("otherValue", otherValue)
   return (
-    <div className="pokerMain">
+    <div className="App">
       <Query query={GET_CARDS_QUERY} >
         {({ data, loading, error }) => {
           if (loading || !data) return <Loader />

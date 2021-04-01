@@ -14,15 +14,12 @@ import { gql } from 'apollo-boost';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import Header from './components/Shared/Header';
 
-
 export const UserContext = React.createContext()
 
 
 function App() {
-  let currentUser = true  //for now
 
   return (
-    <div className="App">
       <Query query={ME_QUERY} fetchPolicy='cache-and-network'>
         {({ data, loading, error }) => {
           console.log(data)
@@ -43,9 +40,6 @@ function App() {
           )
         }}
       </Query>
-      {/* <Test /> */}
-    </div>
-
   )
 }
 
