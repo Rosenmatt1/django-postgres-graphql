@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../../App.css';
-
 import Loader from '../Shared/Loader.js'
 import Error from '../Shared/Error.js'
 

@@ -40,10 +40,9 @@ const IS_LOGGED_IN_QUERY = gql`
 ReactDOM.render(
   <ApolloProvider client={client}>
     <React.StrictMode>
-    <Query query={IS_LOGGED_IN_QUERY}>
-            {({ data }) => data.isLoggedIn ? <App />: <Auth/> }
-        </Query>
-      
+      <Query query={IS_LOGGED_IN_QUERY}>
+        {({ data }) => data.isLoggedIn ? <App /> : <Auth />}
+      </Query>
     </React.StrictMode>
   </ApolloProvider>,
   document.getElementById('root')

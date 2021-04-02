@@ -23,9 +23,8 @@ class Query(graphene.ObjectType):
     def resolve_cards(self, info):
         return Card.objects.filter(used=False)
 
-    # def resolve_used(self, info):
-    #     # print(data.all_cards)
-    #     return Card.objects.filter(used=False)
+    def resolve_all(self, info):
+        return Card.objects.get()
 
 
 class CreateCard(graphene.Mutation):
@@ -67,9 +66,6 @@ class DealHand(graphene.Mutation):
         card2.used = True
         card2.save()
 
-        # print("card3!", card3)
-        print("card3_id", card3_id)
-
         if card3_id:
             card3 = Card.objects.get(id=card3_id)
             card3.active = True
@@ -104,34 +100,36 @@ class ResetDeck(graphene.Mutation):
 
 
 # If I add user functonality.  Each user will have there own deck!  Similar to the Like in the Tracks app
-# class CreateLike(graphene.Mutation):
-#     user = graphene.Field(UserType)
-#     pokemon = graphene.Field(PokemonType)
+class CreateUserDeck(graphene.Mutation):
+    user = graphene.Field(UserType)
+    cards = graphene.List(CardType)
 
-#     class Arguments:
-#         pokemon_id = graphene.Int(required=True)
+    # class Arguments:
+    #     pokemon_id = graphene.Int(required=True)
 
-#     def mutate(self, info, pokemon_id):
-#         user = info.context.user
-#         pokemon = Pokemon.objects.get(id=pokemon_id)
+    def mutate(self, info):
+        user = info.context.user
+        # pokemon = Pokemon.objects.get(id=pokemon_id)
+        cards = Card.objects.all()
 
-#         if user.is_anonymous:
-#             raise GraphQLError('Log in to like a pokemon')
+        if user.is_anonymous:
+            raise GraphQLError('Log in to play poker!')
     
-#         if not pokemon:
-#             raise GraphQLError('Cannot not find pokemon with given pokemon id')
+        if not cards:
+            raise GraphQLError('Cannot not find cards)
 
-#         LikedPokemon.objects.create(
-#         user=user,
-#         pokemon=pokemon
-#         )
+        UserDeck.objects.create(
+        user=user,
+        cards=cards
+        )
 
-#         return CreateLike(user=user, pokemon=pokemon)
+        return CreateUserDeck(user=user, cards=cards)
 
 
 class Mutation(graphene.ObjectType):
     create_card = CreateCard.Field()
     deal_hand = DealHand.Field()
+    create_user_deck = CreateUserDeck()
     reset_deck = ResetDeck.Field()
     
 
