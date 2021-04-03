@@ -3,8 +3,9 @@ from graphene_django import DjangoObjectType
 from graphql import GraphQLError 
 
 from django.db.models import Q  #allows to make more complex qeueries  
-from .models import Card#, DealHand
-# from users.schema import UserType
+from .models import Card, UserDeck
+# , DealHand
+from users.schema import UserType
 
 
 class CardType(DjangoObjectType):
@@ -15,16 +16,25 @@ class CardType(DjangoObjectType):
 #     class Meta:
 #         model = DealHand
 
+class UserDeckType(DjangoObjectType):
+    class Meta:
+        model = UserDeck
+
 
 class Query(graphene.ObjectType):
     cards = graphene.List(CardType)
+    all = graphene.List(CardType)
+    deck = graphene.List(UserDeckType)
     # used = graphene.List(CardType)
 
     def resolve_cards(self, info):
         return Card.objects.filter(used=False)
 
     def resolve_all(self, info):
-        return Card.objects.get()
+        return Card.objects.all()
+    
+    def resolve_deck(self, info):
+        return UserDeck.objects.all()
 
 
 class CreateCard(graphene.Mutation):
@@ -109,14 +119,19 @@ class CreateUserDeck(graphene.Mutation):
 
     def mutate(self, info):
         user = info.context.user
+        print("user!", user)
         # pokemon = Pokemon.objects.get(id=pokemon_id)
+        cards = []
         cards = Card.objects.all()
+
+        # cards = Card.objects.get(id=1)
+        print("cards", cards)
 
         if user.is_anonymous:
             raise GraphQLError('Log in to play poker!')
     
-        if not cards:
-            raise GraphQLError('Cannot not find cards)
+        # if not card:
+        #     raise GraphQLError('Cannot not find cards)
 
         UserDeck.objects.create(
         user=user,
@@ -129,7 +144,7 @@ class CreateUserDeck(graphene.Mutation):
 class Mutation(graphene.ObjectType):
     create_card = CreateCard.Field()
     deal_hand = DealHand.Field()
-    create_user_deck = CreateUserDeck()
+    create_user_deck = CreateUserDeck.Field()
     reset_deck = ResetDeck.Field()
     
 
