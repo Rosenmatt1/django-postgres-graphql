@@ -38,6 +38,7 @@ function App() {
   )
 }
 
+
 export const ME_QUERY = gql`
     {
         me {

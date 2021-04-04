@@ -4,17 +4,12 @@ from graphql import GraphQLError
 
 from django.db.models import Q  #allows to make more complex qeueries  
 from .models import Card, UserDeck
-# , DealHand
 from users.schema import UserType
 
 
 class CardType(DjangoObjectType):
     class Meta:
         model = Card
-
-# class DealType(DjangoObjectType):
-#     class Meta:
-#         model = DealHand
 
 class UserDeckType(DjangoObjectType):
     class Meta:
@@ -100,7 +95,6 @@ class DealHand(graphene.Mutation):
             return DealHand(card1=card1, card2=card2)
 
 
-
 class ResetDeck(graphene.Mutation):
     card = graphene.Field(CardType)
 
@@ -121,7 +115,6 @@ class CreateUserDeck(graphene.Mutation):
         user = info.context.user
         print("user!", user)
         # pokemon = Pokemon.objects.get(id=pokemon_id)
-        cards = []
         cards = Card.objects.all()
 
         # cards = Card.objects.get(id=1)
