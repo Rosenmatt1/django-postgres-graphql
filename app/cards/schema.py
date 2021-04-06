@@ -103,7 +103,6 @@ class ResetDeck(graphene.Mutation):
         return ResetDeck()
 
 
-# If I add user functonality.  Each user will have there own deck!  Similar to the Like in the Tracks app
 class CreateUserDeck(graphene.Mutation):
     user = graphene.Field(UserType)
     cards = graphene.List(CardType)
@@ -113,18 +112,16 @@ class CreateUserDeck(graphene.Mutation):
 
     def mutate(self, info):
         user = info.context.user
-        print("user!", user)
-        # pokemon = Pokemon.objects.get(id=pokemon_id)
-        cards = Card.objects.all()
-
-        # cards = Card.objects.get(id=1)
-        print("cards", cards)
+       
+        cards = Card.objects.get(id=2)
+        #  cards = Card.objects.all()
+        print("card", cards)
 
         if user.is_anonymous:
             raise GraphQLError('Log in to play poker!')
     
         # if not card:
-        #     raise GraphQLError('Cannot not find cards)
+        #     raise GraphQLError('Cannot not find card)
 
         UserDeck.objects.create(
         user=user,
@@ -132,6 +129,36 @@ class CreateUserDeck(graphene.Mutation):
         )
 
         return CreateUserDeck(user=user, cards=cards)
+
+
+# class DealForUser(graphene.Mutation):
+#     user = graphene.Field(UserType)
+#     cards = graphene.List(CardType)
+
+#     # class Arguments:
+#     #     pokemon_id = graphene.Int(required=True)
+
+#     def mutate(self, info):
+#         user = info.context.user
+#         print("user!", user)
+#         # pokemon = Pokemon.objects.get(id=pokemon_id)
+#         cards = Card.objects.all()
+
+#         # cards = Card.objects.get(id=1)
+#         print("cards", cards)
+
+#         if user.is_anonymous:
+#             raise GraphQLError('Log in to play poker!')
+    
+#         # if not card:
+#         #     raise GraphQLError('Cannot not find cards)
+
+#         UserDeck.objects.create(
+#         user=user,
+#         cards=cards
+#         )
+
+#         return DealForUser(user=user, cards=cards)
 
 
 class Mutation(graphene.ObjectType):
