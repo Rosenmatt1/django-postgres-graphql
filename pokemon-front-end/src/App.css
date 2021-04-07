@@ -6,6 +6,10 @@
   position: relative;
 }
 
+/* .junk {
+  position: absolute;
+} */
+
 .counterContainer {
   height: 100px;
   width: 200px;
@@ -87,16 +91,16 @@
 .cards-grid {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
+  justify-content: space-around; 
 }
 
 .card {
-  width: 225px;
-  height: 325px;
+  width: 12vw;
+  height: 16vh;
   background: white;
   box-shadow: 0 0.0625em 0.125em rgba(0, 0, 0, 0.15);
   border-radius: 0.25em;
+  margin-top: 30vh;
 }
 
 .Black {

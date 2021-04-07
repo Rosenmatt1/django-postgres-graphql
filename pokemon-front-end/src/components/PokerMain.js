@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import '../App.css';
-import Reset from './Reset.js'
 import Deal from './Deal.js'
 import Loader from './Shared/Loader.js'
 import Error from './Shared/Error.js'
@@ -25,7 +24,6 @@ function PokerMain() {
 
           return <div className="App">
             <Deal data={data} />
-            <Reset />
           </div>
         }}
       </Query>
