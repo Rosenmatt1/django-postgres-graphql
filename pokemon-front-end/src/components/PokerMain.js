@@ -17,13 +17,13 @@ function PokerMain() {
   // const { otherValue } = useContext(UserContext);
   // console.log("otherValue", otherValue)
   return (
-    <div className="App">
+    <div >
       <Query query={GET_CARDS_QUERY} >
         {({ data, loading, error }) => {
           if (loading || !data) return <Loader />
           if (error) return <Error />
 
-          return <div>
+          return <div className="App">
             <Deal data={data} />
             <Reset />
           </div>

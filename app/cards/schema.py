@@ -105,7 +105,7 @@ class ResetDeck(graphene.Mutation):
 
 class CreateUserDeck(graphene.Mutation):
     user = graphene.Field(UserType)
-    cards = graphene.List(CardType)
+    card = graphene.List(CardType)
 
     # class Arguments:
     #     pokemon_id = graphene.Int(required=True)
@@ -113,9 +113,9 @@ class CreateUserDeck(graphene.Mutation):
     def mutate(self, info):
         user = info.context.user
        
-        cards = Card.objects.get(id=2)
+        card = Card.objects.get(id=4)
         #  cards = Card.objects.all()
-        print("card", cards)
+        print("card", card)
 
         if user.is_anonymous:
             raise GraphQLError('Log in to play poker!')
@@ -125,10 +125,10 @@ class CreateUserDeck(graphene.Mutation):
 
         UserDeck.objects.create(
         user=user,
-        cards=cards
+        card=card
         )
 
-        return CreateUserDeck(user=user, cards=cards)
+        return CreateUserDeck(user=user, card=card)
 
 
 # class DealForUser(graphene.Mutation):

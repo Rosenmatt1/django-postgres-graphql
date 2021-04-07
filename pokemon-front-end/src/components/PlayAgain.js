@@ -16,7 +16,6 @@ function PlayAgain() {
       onCompleted={data => {
         console.log("PlayAgain Mutation worked!!!")
       }}
-    // update={handleUpdateCache}
     refetchQueries={() => [{ query: GET_CARDS_QUERY }]} //could also use graphQL subscriptions
     >
       {(resetDeck, { loading, error }) => {

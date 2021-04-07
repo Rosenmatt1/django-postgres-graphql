@@ -3,10 +3,8 @@ import './App.css';
 import PokerMain from './components/PokerMain.js'
 import Loader from './components/Shared/Loader.js'
 import Error from './components/Shared/Error.js'
-import Register from './components/Auth/Register.js'
-import Login from './components/Auth/Login.js'
 
-import { Query, Mutation } from 'react-apollo';
+import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 

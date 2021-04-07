@@ -14,7 +14,7 @@ class Card(models.Model):
 
 class UserDeck(models.Model):
     user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
-    cards = models.ForeignKey('cards.Card', related_name='UserDeck', on_delete=models.CASCADE)
+    card = models.ForeignKey('cards.Card', related_name='UserDeck', on_delete=models.CASCADE)
 
     # reset = models.BooleanField(default=False)
     # cards_left = models.IntegerField(default=52)

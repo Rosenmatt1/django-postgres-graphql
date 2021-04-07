@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import withRoot from "./withRoot";
 import App from './pages/App';
-import Profile from './pages/Profile';
+// import Profile from './pages/Profile';
 import Header from './components/Shared/Header';
 import Loading from './components/Shared/Loading';
 import Error from './components/Shared/Error';
@@ -30,7 +30,7 @@ const Root = () => (
                         <Header currentUser={currentUser} />
                         <Switch>
                             <Route exact path="/" component={App} />
-                            <Route path="/profile/:id" component={Profile} />
+                            {/* <Route path="/profile/:id" component={Profile} /> */}
                         </Switch>
                     </UserContext.Provider>
                 </Router>

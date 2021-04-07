@@ -5,7 +5,7 @@ import App from './App';
 import Auth from './components/Auth'
 import reportWebVitals from './reportWebVitals';
 
-import { ApolloProvider, Query, Mutation } from 'react-apollo';
+import { ApolloProvider, Query } from 'react-apollo';
 import ApolloClient, { gql } from 'apollo-boost';
 
 

@@ -3,6 +3,7 @@ import '../App.css';
 
 import PokemonCards from './PokemonCards.js'
 import Counter from './Counter.js'
+import WinOrLose from './WinOrLose.js'
 import Loader from './Shared/Loader.js'
 import Error from './Shared/Error.js'
 
@@ -69,6 +70,7 @@ function Deal(data) {
             <div className="dealContainer" onClick={() => generateRandomCards(dealHand)}> <div className="deal"> Deal </div> </div>
             <Counter data={data} />
             <PokemonCards cards={activeCards} />
+            {cards.length == 0 && <WinOrLose winner={winner} />}
           </div>
         )
       }}
