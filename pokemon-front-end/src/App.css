@@ -69,7 +69,6 @@
   /* text-align: center; */
 }
 
-
 .dealContainer {
   height: 100px;
   width: 200px;
@@ -95,11 +94,11 @@
 }
 
 .card {
-  width: 12vw;
-  height: 16vh;
+  width: 13vw;
+  height: 35vh;
   background: white;
   box-shadow: 0 0.0625em 0.125em rgba(0, 0, 0, 0.15);
-  border-radius: 0.25em;
+  border-radius: 0.3em;
   margin-top: 30vh;
 }
 

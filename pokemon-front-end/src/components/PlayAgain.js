@@ -16,19 +16,20 @@ function PlayAgain() {
       onCompleted={data => {
         console.log("PlayAgain Mutation worked!!!")
       }}
-    refetchQueries={() => [{ query: GET_CARDS_QUERY }]} //could also use graphQL subscriptions
+      refetchQueries={() => [{ query: GET_CARDS_QUERY }]} //could also use graphQL subscriptions
     >
       {(resetDeck, { loading, error }) => {
         if (error) return <Error error={error} />
         return (
-          <div className="playAgainContainer" onClick={() => resetDeck()}>
-            <div className="playAgain"> Play Again </div>
+          <div className="dealContainer" onClick={() => resetDeck()}>
+            <div className="deal"> Play Again </div>
           </div>
         )
       }}
     </Mutation>
   );
 }
+
 
 const PLAY_AGAIN_MUTATION = gql`
   mutation {

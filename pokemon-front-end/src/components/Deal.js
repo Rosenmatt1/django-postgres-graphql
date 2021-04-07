@@ -4,6 +4,7 @@ import '../App.css';
 import PokemonCards from './PokemonCards.js';
 import Counter from './Counter.js';
 import WinOrLose from './WinOrLose.js';
+import PlayAgain from './PlayAgain';
 import Reset from './Reset.js';
 import Loader from './Shared/Loader.js';
 import Error from './Shared/Error.js';
@@ -16,6 +17,7 @@ import { GET_CARDS_QUERY } from './PokerMain.js';
 function Deal(data) {
   console.log("RENDER ALL")
   const [winner, setWinner] = useState(false);
+  // const [finished, setFinished] = useState(false);
   let cards = data.data.cards
   let card = null
   let activeCards = []
@@ -67,8 +69,8 @@ function Deal(data) {
       {(dealHand, { loading, error }) => {
         if (error) return <Error error={error} />
         return (
-          <div className="junk">
-            <div className="dealContainer" onClick={() => generateRandomCards(dealHand)}> <div className="deal"> Deal </div> </div>
+          <div>
+            {cards.length == 0 ? <PlayAgain /> : <div className="dealContainer" onClick={() => generateRandomCards(dealHand)}> <div className="deal"> Deal </div> </div> }
             <Counter data={data} />
             <PokemonCards cards={activeCards} />
             {cards.length == 0 && <WinOrLose winner={winner} />}

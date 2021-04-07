@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import '../App.css';
-import Deal from './Deal.js'
-import Loader from './Shared/Loader.js'
-import Error from './Shared/Error.js'
+import Deal from './Deal.js';
+import Loader from './Shared/Loader.js';
+import Error from './Shared/Error.js';
 
 import { Query, Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
@@ -21,6 +21,7 @@ function PokerMain() {
         {({ data, loading, error }) => {
           if (loading || !data) return <Loader />
           if (error) return <Error />
+          console.log("PokerMain Card Data...", data.cards)
 
           return <div className="App">
             <Deal data={data} />
