@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 
 # # Create your models here.
 
+#this set up is ideal for one user.
 class Card(models.Model):
     name = models.CharField(max_length=10)
     suit = models.CharField(max_length=10)
@@ -10,13 +11,15 @@ class Card(models.Model):
     active = models.BooleanField(default=False)
     used = models.BooleanField(default=False)
 
+#this set up allows for a card to have a user associated with it.  The user_id could be passed in as an argument on the front end.  
+# The would require authentication.
 class CardWithUser(models.Model):
     name = models.CharField(max_length=10)
     suit = models.CharField(max_length=10)
     color = models.CharField(max_length=10)
     active = models.BooleanField(default=False)
     used = models.BooleanField(default=False)
-    user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
 
 
 # class UserDeck(models.Model):
