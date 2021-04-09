@@ -1,5 +1,4 @@
 from django.db import models
-
 from django.contrib.auth import get_user_model
 
 # # Create your models here.
@@ -11,10 +10,21 @@ class Card(models.Model):
     active = models.BooleanField(default=False)
     used = models.BooleanField(default=False)
 
-
-class UserDeck(models.Model):
+class CardWithUser(models.Model):
+    name = models.CharField(max_length=10)
+    suit = models.CharField(max_length=10)
+    color = models.CharField(max_length=10)
+    active = models.BooleanField(default=False)
+    used = models.BooleanField(default=False)
     user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
-    card = models.ForeignKey('cards.Card', related_name='UserDeck', on_delete=models.CASCADE)
+
+
+# class UserDeck(models.Model):
+#     user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
+#     card = models.ForeignKey('cards.Card', related_name='UserDeck', on_delete=models.CASCADE)
+
+
+
 
     # reset = models.BooleanField(default=False)
     # cards_left = models.IntegerField(default=52)

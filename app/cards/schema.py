@@ -3,7 +3,8 @@ from graphene_django import DjangoObjectType
 from graphql import GraphQLError 
 
 from django.db.models import Q  #allows to make more complex qeueries  
-from .models import Card, UserDeck
+from .models import Card, CardWithUser
+# , UserDeck
 from users.schema import UserType
 
 
@@ -11,16 +12,19 @@ class CardType(DjangoObjectType):
     class Meta:
         model = Card
 
-class UserDeckType(DjangoObjectType):
+# class UserDeckType(DjangoObjectType):
+#     class Meta:
+#         model = UserDeck
+
+class CardWithUserType(DjangoObjectType):
     class Meta:
-        model = UserDeck
+        model = CardWithUser
 
 
 class Query(graphene.ObjectType):
     cards = graphene.List(CardType)
     all = graphene.List(CardType)
-    deck = graphene.List(UserDeckType)
-    # used = graphene.List(CardType)
+    # deck = graphene.List(UserDeckType)
 
     def resolve_cards(self, info):
         return Card.objects.filter(used=False)
@@ -28,8 +32,8 @@ class Query(graphene.ObjectType):
     def resolve_all(self, info):
         return Card.objects.all()
     
-    def resolve_deck(self, info):
-        return UserDeck.objects.all()
+    # def resolve_deck(self, info):
+    #     return UserDeck.objects.all()
 
 
 class CreateCard(graphene.Mutation):
@@ -103,68 +107,38 @@ class ResetDeck(graphene.Mutation):
         return ResetDeck()
 
 
-class CreateUserDeck(graphene.Mutation):
-    user = graphene.Field(UserType)
-    card = graphene.List(CardType)
-
-    # class Arguments:
-    #     pokemon_id = graphene.Int(required=True)
-
-    def mutate(self, info):
-        user = info.context.user
-       
-        card = Card.objects.get(id=4)
-        #  cards = Card.objects.all()
-        print("card", card)
-
-        if user.is_anonymous:
-            raise GraphQLError('Log in to play poker!')
-    
-        # if not card:
-        #     raise GraphQLError('Cannot not find card)
-
-        UserDeck.objects.create(
-        user=user,
-        card=card
-        )
-
-        return CreateUserDeck(user=user, card=card)
-
-
-# class DealForUser(graphene.Mutation):
+# class CreateUserDeck(graphene.Mutation):
 #     user = graphene.Field(UserType)
-#     cards = graphene.List(CardType)
+#     card = graphene.List(CardType)
 
 #     # class Arguments:
 #     #     pokemon_id = graphene.Int(required=True)
 
 #     def mutate(self, info):
 #         user = info.context.user
-#         print("user!", user)
-#         # pokemon = Pokemon.objects.get(id=pokemon_id)
-#         cards = Card.objects.all()
-
-#         # cards = Card.objects.get(id=1)
-#         print("cards", cards)
+       
+#         card = Card.objects.get(id=4)
+#         #  cards = Card.objects.all()
+#         print("card", card)
 
 #         if user.is_anonymous:
 #             raise GraphQLError('Log in to play poker!')
     
 #         # if not card:
-#         #     raise GraphQLError('Cannot not find cards)
+#         #     raise GraphQLError('Cannot not find card)
 
 #         UserDeck.objects.create(
 #         user=user,
-#         cards=cards
+#         card=card
 #         )
 
-#         return DealForUser(user=user, cards=cards)
+#         return CreateUserDeck(user=user, card=card)
 
 
 class Mutation(graphene.ObjectType):
     create_card = CreateCard.Field()
     deal_hand = DealHand.Field()
-    create_user_deck = CreateUserDeck.Field()
+    # create_user_deck = CreateUserDeck.Field()
     reset_deck = ResetDeck.Field()
     
 
