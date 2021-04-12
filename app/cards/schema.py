@@ -3,7 +3,8 @@ from graphene_django import DjangoObjectType
 from graphql import GraphQLError 
 
 from django.db.models import Q  #allows to make more complex qeueries  
-from .models import Card, CardWithUser
+from .models import Card
+# , CardWithUser
 # , UserDeck
 from users.schema import UserType
 
@@ -16,9 +17,9 @@ class CardType(DjangoObjectType):
 #     class Meta:
 #         model = UserDeck
 
-class CardWithUserType(DjangoObjectType):
-    class Meta:
-        model = CardWithUser
+# class CardWithUserType(DjangoObjectType):
+#     class Meta:
+#         model = CardWithUser
 
 
 class Query(graphene.ObjectType):

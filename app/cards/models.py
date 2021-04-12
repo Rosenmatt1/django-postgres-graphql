@@ -8,35 +8,42 @@ class Card(models.Model):
     name = models.CharField(max_length=10)
     suit = models.CharField(max_length=10)
     color = models.CharField(max_length=10)
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=False)   #active is not neceessary in this model
     used = models.BooleanField(default=False)
 
-#this set up allows for a card to have a user associated with it.  The user_id could be passed in as an argument on the front end.  
+#this set up allows for a card to have a user associated with it.  T 
 # The would require authentication.
-class CardWithUser(models.Model):
-    name = models.CharField(max_length=10)
-    suit = models.CharField(max_length=10)
-    color = models.CharField(max_length=10)
-    active = models.BooleanField(default=False)
-    used = models.BooleanField(default=False)
-    user_id = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
+#he user_id could be passed in as an argument on the front end and random cards queried and selected on back end.  
 
+# class CardWithUser(models.Model):
+#     name = models.CharField(max_length=10)
+#     suit = models.CharField(max_length=10)
+#     color = models.CharField(max_length=10)
+#     active = models.BooleanField(default=False)
+#     used = models.BooleanField(default=False)
+#     user_id = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
 
+#With this set up , the logic to find the random cards would need to be done on the back end and then 
 # class UserDeck(models.Model):
 #     user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
 #     card = models.ForeignKey('cards.Card', related_name='UserDeck', on_delete=models.CASCADE)
+#     card1 = models.ForeignKey('cards.Card', related_name='UserDeck', on_delete=models.CASCADE)
+#     card2 = models.ForeignKey('cards.Card', related_name='UserDeck', on_delete=models.CASCADE)
+#     card3 = models.ForeignKey('cards.Card', related_name='UserDeck', on_delete=models.CASCADE)
+#     card4 = models.ForeignKey('cards.Card', related_name='UserDeck', on_delete=models.CASCADE)
+#     card5 = models.ForeignKey('cards.Card', related_name='UserDeck', on_delete=models.CASCADE)
 
+# ***With the later two, I can't seem to account for the reset funtionality.  
+
+
+# class DealerDeck(models.Model):
+#     card = models.ForeignKey('cards.Card', related_name='DealerDeck', on_delete=models.CASCADE)
 
 
 
     # reset = models.BooleanField(default=False)
     # cards_left = models.IntegerField(default=52)
 
-
-# class DealerDeck(models.Model):
-#     card = models.ForeignKey('cards.Card', related_name='DealerDeck', on_delete=models.CASCADE)
-#     reset = models.BooleanField(default=False)
-#     cards_left = models.IntegerField(default=52)
 
 
 # # What does this field do?
